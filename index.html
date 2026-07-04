@@ -716,6 +716,135 @@
     transform: translateY(-1px);
   }
 
+  /* ── GUARANTEE BANNER ── */
+  .guarantee-banner {
+    max-width: 900px;
+    margin: 40px auto 0;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 24px 28px;
+    background: rgba(0,230,118,0.05);
+    border: 1px solid rgba(0,230,118,0.2);
+    border-radius: 14px;
+  }
+
+  .guarantee-icon {
+    font-size: 1.8rem;
+    flex-shrink: 0;
+  }
+
+  .guarantee-text strong {
+    display: block;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .guarantee-text p {
+    font-size: 0.85rem;
+    color: var(--muted2);
+    line-height: 1.5;
+  }
+
+  /* ── TESTIMONIALS ── */
+  .testimonials {
+    padding: 100px 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .testimonials-header {
+    text-align: center;
+    margin-bottom: 24px;
+  }
+
+  .placeholder-note {
+    max-width: 560px;
+    margin: 0 auto 48px;
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--muted);
+    background: rgba(255,255,255,0.03);
+    border: 1px dashed var(--border);
+    border-radius: 10px;
+    padding: 10px 16px;
+  }
+
+  .testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .testimonial-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px;
+    position: relative;
+  }
+
+  .testimonial-tag {
+    position: absolute;
+    top: 16px; right: 16px;
+    font-size: 0.65rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 3px 10px;
+  }
+
+  .testimonial-metric {
+    display: inline-block;
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.4rem;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+
+  .testimonial-quote {
+    font-size: 0.875rem;
+    color: var(--muted2);
+    line-height: 1.65;
+    margin-bottom: 20px;
+  }
+
+  .testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .testimonial-avatar {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.8rem;
+    color: var(--bg);
+    flex-shrink: 0;
+  }
+
+  .testimonial-author strong {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .testimonial-author span {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+
   /* ── FAQ ── */
   .faq {
     padding: 100px 0;
@@ -904,6 +1033,7 @@
   <ul>
     <li><a href="#como-funciona">Cómo funciona</a></li>
     <li><a href="#que-incluye">Qué incluye</a></li>
+    <li><a href="#testimonios">Testimonios</a></li>
     <li><a href="#precios">Precios</a></li>
     <li><a href="#faq">FAQ</a></li>
     <li><a href="#contacto" class="nav-cta">Agendar demo →</a></li>
@@ -1133,6 +1263,60 @@
   </div>
 </section>
 
+<!-- TESTIMONIALS -->
+<section class="testimonials" id="testimonios">
+  <div class="container">
+    <div class="testimonials-header">
+      <div class="section-label">Casos de uso</div>
+      <h2 class="section-title">Así lo usan otros negocios</h2>
+    </div>
+    <div class="placeholder-note">
+      ⚠️ Casos ilustrativos — estamos reuniendo testimonios reales de nuestros primeros clientes. Se reemplazarán por historias verificadas apenas estén disponibles.
+    </div>
+
+    <div class="testimonial-grid">
+      <div class="testimonial-card">
+        <div class="testimonial-tag">Caso ilustrativo</div>
+        <div class="testimonial-metric">+35% ROAS</div>
+        <p class="testimonial-quote">"En la primera semana Claude detectó dos campañas quemadas que veníamos pausando tarde a mano. Redirigir ese presupuesto solo ya justificó el setup."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">MG</div>
+          <div>
+            <strong>Nombre Apellido</strong>
+            <span>Ecommerce de indumentaria — Montevideo</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="testimonial-tag">Caso ilustrativo</div>
+        <div class="testimonial-metric">-40% tiempo de gestión</div>
+        <p class="testimonial-quote">"Antes dependía de una agencia para cualquier ajuste. Ahora le pregunto a Claude directamente y tomo la decisión en el momento."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">RP</div>
+          <div>
+            <strong>Nombre Apellido</strong>
+            <span>Clínica estética — Buenos Aires</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="testimonial-tag">Caso ilustrativo</div>
+        <div class="testimonial-metric">1 día</div>
+        <p class="testimonial-quote">"El setup fue rapidísimo y la capacitación dejó claro qué preguntar. No necesité a nadie técnico del equipo."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">SL</div>
+          <div>
+            <strong>Nombre Apellido</strong>
+            <span>Estudio inmobiliario — Punta del Este</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- PRICING -->
 <section class="pricing" id="precios">
   <div class="container">
@@ -1193,12 +1377,22 @@
         </div>
         <ul class="plan-items">
           <li>Requiere haber hecho el setup</li>
+          <li>Reportes mensuales automáticos de performance</li>
+          <li>Alertas proactivas ante caídas de ROAS o fatiga creativa</li>
           <li>2 sesiones mensuales de optimización</li>
           <li>Nuevos flujos y prompts cada mes</li>
           <li>Soporte prioritario WhatsApp</li>
-          <li>Acceso a nuevas integraciones</li>
+          <li>Acceso anticipado a nuevas integraciones</li>
         </ul>
         <a href="#contacto" class="plan-btn outlined">Consultar →</a>
+      </div>
+    </div>
+
+    <div class="guarantee-banner">
+      <div class="guarantee-icon">🛡️</div>
+      <div class="guarantee-text">
+        <strong>Garantía de 1 día</strong>
+        <p>Si no dejamos tu integración de Claude ↔ Meta Ads funcionando en el plazo prometido, te devolvemos el 100% de lo pagado por el setup. Sin letra chica.</p>
       </div>
     </div>
   </div>
@@ -1260,6 +1454,14 @@
           <span class="arrow">▾</span>
         </div>
         <div class="faq-a">La configuración técnica tarda menos de 2 horas. En el mismo día te hacemos la primera sesión de capacitación y terminás operando con la IA activa en tus campañas.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          ¿Qué pasa si Meta cambia las condiciones del conector?
+          <span class="arrow">▾</span>
+        </div>
+        <div class="faq-a">Monitoreamos el conector oficial de Meta de forma continua. Si en algún momento cambian sus condiciones o su disponibilidad, adaptamos tu integración sin costo adicional — es parte del soporte incluido en todos nuestros planes. Vos seguís operando sin interrupciones.</div>
       </div>
 
     </div>
