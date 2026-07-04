@@ -2,6 +2,8 @@
 
 Incluida en el plan Starter. Dirigida al dueño del negocio o marketer que va a operar sus Meta Ads con Claude — sin conocimiento técnico previo.
 
+**Relación con el plan Pro:** este es el contenido de la **Sesión 1 de 2** para clientes Pro (la cuota mensual incluye "2 sesiones de capacitación inicial, 2h total"). Es idéntica para Starter y Pro — los clientes Pro continúan con `capacitacion-pro-sesion-2.md`, que profundiza en lo exclusivo del plan.
+
 **Objetivo de la sesión:** que el cliente termine la hora sabiendo qué preguntarle a Claude, cómo interpretar sus respuestas y qué decisiones tomar con su cuenta real — listo para operar solo desde el día siguiente.
 
 Este documento sirve como guía para quien dicta la sesión en ADSIA y, en su última sección, como resumen que el cliente se lleva al terminar.
