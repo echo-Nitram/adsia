@@ -1093,12 +1093,126 @@
   }
   .service-link:hover { text-decoration: underline; }
 
+  /* ── QUOTE CALCULATOR ── */
+  .quote {
+    padding: 100px 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .quote-header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .quote-box {
+    max-width: 640px;
+    margin: 0 auto;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 36px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    transform-style: preserve-3d;
+  }
+
+  .quote-field { margin-bottom: 20px; }
+
+  .quote-field label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--muted2);
+    margin-bottom: 8px;
+  }
+
+  .quote-field select,
+  .quote-field input,
+  .quote-field textarea {
+    width: 100%;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    color: var(--text);
+    transition: border-color 0.2s;
+  }
+
+  .quote-field select:focus,
+  .quote-field input:focus,
+  .quote-field textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+
+  .quote-field select:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  .quote-field textarea { resize: vertical; min-height: 80px; }
+
+  .quote-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .quote-hint {
+    font-size: 0.75rem;
+    color: var(--muted);
+    margin-top: -12px;
+    margin-bottom: 20px;
+  }
+
+  #quote-submit { width: 100%; margin-top: 8px; }
+
+  .quote-result { text-align: center; }
+
+  .quote-result-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+
+  .quote-result-amount {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 2.2rem;
+    color: var(--accent);
+    margin-bottom: 14px;
+    line-height: 1.25;
+  }
+
+  .quote-result-note {
+    font-size: 0.85rem;
+    color: var(--muted2);
+    line-height: 1.6;
+    max-width: 460px;
+    margin: 0 auto 24px;
+  }
+
+  .quote-result-status {
+    font-size: 0.75rem;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+
+  .quote-result-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
   /* ── RESPONSIVE ── */
   @media (max-width: 768px) {
     nav ul { display: none; }
     .how-grid { grid-template-columns: 1fr; gap: 48px; }
     .services-grid { grid-template-columns: 1fr; }
     .testimonial-grid { grid-template-columns: 1fr; }
+    .quote-box { padding: 24px; }
+    .quote-grid-2 { grid-template-columns: 1fr; gap: 0; }
     footer { flex-direction: column; text-align: center; }
   }
 </style>
@@ -1118,6 +1232,7 @@
     <li><a href="#servicios">Servicios</a></li>
     <li><a href="#como-trabajamos">Cómo trabajamos</a></li>
     <li><a href="#casos">Casos</a></li>
+    <li><a href="#presupuesto">Presupuesto</a></li>
     <li><a href="#faq">FAQ</a></li>
     <li><a href="#contacto" class="nav-cta" data-magnetic="true">Diagnóstico gratis →</a></li>
   </ul>
@@ -1427,6 +1542,80 @@
   </div>
 </section>
 
+<!-- QUOTE CALCULATOR -->
+<section class="quote" id="presupuesto">
+  <div class="container">
+    <div class="quote-header">
+      <div class="section-label" data-reveal="0">Presupuesto estimado</div>
+      <h2 class="section-title" data-reveal="1">Contanos tu caso,<br>mirá un rango al instante</h2>
+      <p class="section-sub" data-reveal="2" style="margin:12px auto 0;text-align:center">
+        Es un cálculo orientativo con reglas simples, no una cotización final. Lo revisamos a mano y
+        te confirmamos el número definitivo por WhatsApp o email.
+      </p>
+    </div>
+
+    <div class="quote-box" data-tilt="soft" data-reveal="2">
+      <form id="quote-form" action="https://formsubmit.co/hola@adsia.lat" method="POST">
+        <input type="hidden" name="_subject" value="Nueva solicitud de presupuesto — ADSIA">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+        <input type="hidden" name="Estimado calculado" id="q-estimate-hidden">
+
+        <div class="quote-field">
+          <label for="q-service">¿Qué servicio te interesa?</label>
+          <select id="q-service" name="Servicio de interés" required>
+            <option value="" disabled selected>Elegí un servicio</option>
+          </select>
+        </div>
+
+        <div class="quote-field">
+          <label for="q-tier" id="q-tier-label">Elegí un servicio primero</label>
+          <select id="q-tier" name="Tramo" required disabled>
+            <option value="" disabled selected>—</option>
+          </select>
+        </div>
+
+        <div class="quote-grid-2">
+          <div class="quote-field">
+            <label for="q-name">Nombre</label>
+            <input type="text" id="q-name" name="Nombre" required>
+          </div>
+          <div class="quote-field">
+            <label for="q-business">Negocio</label>
+            <input type="text" id="q-business" name="Negocio">
+          </div>
+          <div class="quote-field">
+            <label for="q-email">Email</label>
+            <input type="email" id="q-email" name="Email" required>
+          </div>
+          <div class="quote-field">
+            <label for="q-phone">WhatsApp</label>
+            <input type="tel" id="q-phone" name="WhatsApp" placeholder="+598...">
+          </div>
+        </div>
+
+        <div class="quote-field">
+          <label for="q-notes">Contanos algo más de tu caso (opcional)</label>
+          <textarea id="q-notes" name="Comentario" rows="3"></textarea>
+        </div>
+
+        <button type="submit" class="btn-primary" id="quote-submit" data-magnetic="true">Ver mi presupuesto estimado →</button>
+      </form>
+
+      <div class="quote-result" id="quote-result" hidden>
+        <div class="quote-result-label">Tu presupuesto estimado</div>
+        <div class="quote-result-amount" id="quote-result-amount">—</div>
+        <p class="quote-result-note" id="quote-result-note"></p>
+        <p class="quote-result-status" id="quote-result-status">Enviando tu información a nuestro equipo...</p>
+        <div class="quote-result-actions">
+          <a href="#" id="quote-whatsapp-link" class="btn-secondary" target="_blank">📱 Confirmar también por WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- DIAGNÓSTICO -->
 <section class="pricing" id="diagnostico">
   <div class="container">
@@ -1567,7 +1756,7 @@
   <div class="footer-copy">© 2026 ADSIA — Uruguay & Argentina</div>
   <div class="footer-links">
     <a href="#servicios">Servicios</a>
-    <a href="#como-trabajamos">Cómo trabajamos</a>
+    <a href="#presupuesto">Presupuesto</a>
     <a href="#contacto">Contacto</a>
   </div>
 </footer>
@@ -1833,6 +2022,145 @@ function initParallax() {
   window.addEventListener('scroll', upd, { passive: true });
 }
 
+// ── Presupuesto estimado: config de precios ──
+// EDITAR ACÁ los números — son valores de referencia, hay que confirmarlos
+// con los precios reales de cada servicio antes de tomarlos como definitivos.
+const PRICING = {
+  meta: {
+    label: 'Meta Ads con capa de IA',
+    variableLabel: '¿Cuánto gastás hoy por mes en pauta de Meta Ads?',
+    tiers: [
+      { value: 'lt500', label: 'Menos de $500 USD/mes', low: 99, high: 149 },
+      { value: '500to2000', label: 'Entre $500 y $2.000 USD/mes', low: 149, high: 249 },
+      { value: 'gt2000', label: 'Más de $2.000 USD/mes', low: 249, high: 399 }
+    ]
+  },
+  automation: {
+    label: 'Automatización con agentes',
+    variableLabel: '¿Cuántos procesos o canales querés automatizar?',
+    tiers: [
+      { value: '1', label: '1 proceso (ej. solo WhatsApp)', setupLow: 249, setupHigh: 349, monthlyLow: 149, monthlyHigh: 199 },
+      { value: '2-3', label: '2 a 3 procesos', setupLow: 349, setupHigh: 599, monthlyLow: 199, monthlyHigh: 299 },
+      { value: '4plus', label: '4 o más procesos', custom: true }
+    ]
+  },
+  consulting: {
+    label: 'Consultoría IA para PyMEs',
+    variableLabel: '¿Cuántos empleados tiene tu empresa?',
+    tiers: [
+      { value: '1-10', label: '1 a 10 empleados', low: 299, high: 499 },
+      { value: '11-50', label: '11 a 50 empleados', low: 599, high: 999 },
+      { value: '50plus', label: 'Más de 50 empleados', custom: true }
+    ]
+  }
+};
+
+function formatEstimate(serviceKey, tierValue) {
+  const service = PRICING[serviceKey];
+  const tier = service.tiers.find(t => t.value === tierValue);
+  if (!service || !tier) return null;
+
+  if (tier.custom) {
+    return {
+      amount: 'A cotizar',
+      note: 'Tu caso tiene una escala particular — preferimos armarte una propuesta a medida en vez de mostrarte un número que no aplicaría. Nuestro equipo te contacta directo.'
+    };
+  }
+
+  if (serviceKey === 'automation') {
+    return {
+      amount: `$${tier.setupLow}–$${tier.setupHigh} setup + $${tier.monthlyLow}–$${tier.monthlyHigh} USD/mes`,
+      note: 'Incluye configuración inicial del agente y honorario mensual de mantenimiento. Rango orientativo — te confirmamos el número exacto según el alcance real.'
+    };
+  }
+
+  if (serviceKey === 'consulting') {
+    return {
+      amount: `$${tier.low}–$${tier.high} USD (pago único)`,
+      note: 'Incluye diagnóstico completo y plan de implementación priorizado. Rango orientativo — te confirmamos el número exacto según el alcance real.'
+    };
+  }
+
+  return {
+    amount: `$${tier.low}–$${tier.high} USD/mes`,
+    note: 'Honorario de gestión mensual, además de tu presupuesto de pauta en Meta. Rango orientativo — te confirmamos el número exacto según el alcance real.'
+  };
+}
+
+// ── Presupuesto estimado: wiring del formulario ──
+function initQuote() {
+  const form = document.getElementById('quote-form');
+  if (!form) return;
+
+  const serviceSelect = document.getElementById('q-service');
+  const tierSelect = document.getElementById('q-tier');
+  const tierLabel = document.getElementById('q-tier-label');
+  const estimateHidden = document.getElementById('q-estimate-hidden');
+  const result = document.getElementById('quote-result');
+  const resultAmount = document.getElementById('quote-result-amount');
+  const resultNote = document.getElementById('quote-result-note');
+  const resultStatus = document.getElementById('quote-result-status');
+  const whatsappLink = document.getElementById('quote-whatsapp-link');
+
+  Object.keys(PRICING).forEach(key => {
+    const opt = document.createElement('option');
+    opt.value = key;
+    opt.textContent = PRICING[key].label;
+    serviceSelect.appendChild(opt);
+  });
+
+  serviceSelect.addEventListener('change', () => {
+    const service = PRICING[serviceSelect.value];
+    tierSelect.innerHTML = '<option value="" disabled selected>Elegí una opción</option>';
+    if (!service) {
+      tierSelect.disabled = true;
+      tierLabel.textContent = 'Elegí un servicio primero';
+      return;
+    }
+    tierLabel.textContent = service.variableLabel;
+    service.tiers.forEach(tier => {
+      const opt = document.createElement('option');
+      opt.value = tier.value;
+      opt.textContent = tier.label;
+      tierSelect.appendChild(opt);
+    });
+    tierSelect.disabled = false;
+  });
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const estimate = formatEstimate(serviceSelect.value, tierSelect.value);
+    if (!estimate) return;
+
+    estimateHidden.value = estimate.amount;
+    resultAmount.textContent = estimate.amount;
+    resultNote.textContent = estimate.note;
+    resultStatus.textContent = 'Enviando tu información a nuestro equipo...';
+
+    const name = document.getElementById('q-name').value;
+    const service = PRICING[serviceSelect.value];
+    const waText = `Hola! Soy ${name}. Completé el formulario de presupuesto de ADSIA para ${service.label} y mi estimado fue: ${estimate.amount}. ¿Podemos confirmar los detalles?`;
+    whatsappLink.href = `https://wa.me/59892290002?text=${encodeURIComponent(waText)}`;
+
+    form.hidden = true;
+    result.hidden = false;
+
+    try {
+      const res = await fetch('https://formsubmit.co/ajax/hola@adsia.lat', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(form)
+      });
+      resultStatus.textContent = res.ok
+        ? 'Listo — recibimos tu información. Te confirmamos el número definitivo pronto.'
+        : 'Guardamos tu estimado. Si no tenés novedades en 48hs, escribinos por WhatsApp para asegurarnos de que llegó.';
+    } catch (err) {
+      console.warn(err);
+      resultStatus.textContent = 'Guardamos tu estimado. Si no tenés novedades en 48hs, escribinos por WhatsApp para asegurarnos de que llegó.';
+    }
+  });
+}
+
 setTimeout(() => {
   try { initParticles(); } catch (e) { console.warn(e); }
   try { initCursor(); } catch (e) { console.warn(e); }
@@ -1843,6 +2171,7 @@ setTimeout(() => {
   try { initChat(); } catch (e) { console.warn(e); }
   try { initCounts(); } catch (e) { console.warn(e); }
   try { initParallax(); } catch (e) { console.warn(e); }
+  try { initQuote(); } catch (e) { console.warn(e); }
 }, 60);
 </script>
 </body>
