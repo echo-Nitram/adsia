@@ -189,17 +189,18 @@
     justify-content: center;
   }
 
-  #hero-3d {
-    position: absolute;
+  #bg-3d {
+    position: fixed;
     inset: 0;
     z-index: -1;
     opacity: 0;
     transition: opacity 1.4s ease;
-    mask-image: radial-gradient(ellipse 75% 70% at 50% 45%, black 30%, transparent 78%);
-    -webkit-mask-image: radial-gradient(ellipse 75% 70% at 50% 45%, black 30%, transparent 78%);
+    pointer-events: none;
+    mask-image: radial-gradient(ellipse 95% 90% at 50% 50%, black 60%, transparent 100%);
+    -webkit-mask-image: radial-gradient(ellipse 95% 90% at 50% 50%, black 60%, transparent 100%);
   }
-  #hero-3d.on { opacity: 1; }
-  #hero-3d canvas { display: block; width: 100%; height: 100%; }
+  #bg-3d.on { opacity: 1; }
+  #bg-3d canvas { display: block; width: 100%; height: 100%; }
 
   .hero-badge {
     display: inline-flex;
@@ -1012,6 +1013,7 @@
 <body>
 
 <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+<div id="bg-3d" aria-hidden="true"></div>
 
 <!-- FONDO -->
 <div class="bg-stage" aria-hidden="true">
@@ -1034,8 +1036,6 @@
 
 <!-- HERO -->
 <section class="hero" data-screen-label="Hero">
-  <div id="hero-3d" aria-hidden="true"></div>
-
   <div class="hero-inner" id="hero-inner">
   <div class="hero-badge">
     <span class="dot"></span>
@@ -1583,9 +1583,9 @@ const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matc
   });
 })();
 
-// ── Objeto 3D del hero (Three.js, carga diferida) ──
+// ── Objeto 3D persistente (Three.js) — recorre toda la página con el scroll ──
 (function () {
-  const mount = document.getElementById('hero-3d');
+  const mount = document.getElementById('bg-3d');
   if (!mount || reducedMotion) return;
   if (navigator.connection && navigator.connection.saveData) return;
 
@@ -1604,7 +1604,7 @@ const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matc
   function start() {
     if (!window.THREE) return;
     const THREE = window.THREE;
-    let W = mount.clientWidth, H = mount.clientHeight;
+    let W = window.innerWidth, H = window.innerHeight;
 
     const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.75));
@@ -1615,41 +1615,63 @@ const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matc
     const camera = new THREE.PerspectiveCamera(50, W / H, 0.1, 100);
     camera.position.z = 7;
 
-    const group = new THREE.Group();
-    scene.add(group);
+    const master = new THREE.Group();
+    scene.add(master);
 
-    // Icosaedro wireframe principal
-    const geo = new THREE.IcosahedronGeometry(2.5, 1);
-    const wire = new THREE.LineSegments(
-      new THREE.WireframeGeometry(geo),
-      new THREE.LineBasicMaterial({ color: 0x00E5FF, transparent: true, opacity: 0.30 })
-    );
-    group.add(wire);
+    const CYAN = 0x00E5FF, VIOLET = 0x7C6CFF;
 
-    // Icosaedro interior violeta
-    const wire2 = new THREE.LineSegments(
-      new THREE.WireframeGeometry(new THREE.IcosahedronGeometry(1.55, 0)),
-      new THREE.LineBasicMaterial({ color: 0x7C6CFF, transparent: true, opacity: 0.35 })
-    );
-    group.add(wire2);
-
-    // Nodos en los vértices
-    const pos = geo.attributes.position;
-    const uniq = new Map();
-    for (let i = 0; i < pos.count; i++) {
-      const k = pos.getX(i).toFixed(3) + ',' + pos.getY(i).toFixed(3) + ',' + pos.getZ(i).toFixed(3);
-      if (!uniq.has(k)) uniq.set(k, [pos.getX(i), pos.getY(i), pos.getZ(i)]);
+    function vertsOf(geo) {
+      const pos = geo.attributes.position, uniq = new Map();
+      for (let i = 0; i < pos.count; i++) {
+        const k = pos.getX(i).toFixed(3) + ',' + pos.getY(i).toFixed(3) + ',' + pos.getZ(i).toFixed(3);
+        if (!uniq.has(k)) uniq.set(k, [pos.getX(i), pos.getY(i), pos.getZ(i)]);
+      }
+      const arr = [];
+      uniq.forEach(v => arr.push(v[0], v[1], v[2]));
+      const g = new THREE.BufferGeometry();
+      g.setAttribute('position', new THREE.Float32BufferAttribute(arr, 3));
+      return g;
     }
-    const nodeGeo = new THREE.BufferGeometry();
-    const arr = [];
-    uniq.forEach(v => arr.push(v[0], v[1], v[2]));
-    nodeGeo.setAttribute('position', new THREE.Float32BufferAttribute(arr, 3));
-    const nodes = new THREE.Points(nodeGeo, new THREE.PointsMaterial({
-      color: 0x00E5FF, size: 0.09, transparent: true, opacity: 0.9, sizeAttenuation: true
-    }));
-    group.add(nodes);
 
-    // Partículas de fondo
+    // Cada "forma" = wireframe cyan + wireframe interior violeta + nodos en vértices
+    function makeShape(outerGeo, innerGeo, nodeSize) {
+      const g = new THREE.Group();
+      const mats = [];
+      const wire = new THREE.LineSegments(
+        new THREE.WireframeGeometry(outerGeo),
+        new THREE.LineBasicMaterial({ color: CYAN, transparent: true, opacity: 0 })
+      );
+      mats.push({ m: wire.material, base: 0.30 });
+      g.add(wire);
+      if (innerGeo) {
+        const wire2 = new THREE.LineSegments(
+          new THREE.WireframeGeometry(innerGeo),
+          new THREE.LineBasicMaterial({ color: VIOLET, transparent: true, opacity: 0 })
+        );
+        mats.push({ m: wire2.material, base: 0.35 });
+        g.add(wire2);
+        g.userData.inner = wire2;
+      }
+      const nodes = new THREE.Points(vertsOf(outerGeo), new THREE.PointsMaterial({
+        color: CYAN, size: nodeSize || 0.09, transparent: true, opacity: 0, sizeAttenuation: true
+      }));
+      mats.push({ m: nodes.material, base: 0.9 });
+      g.add(nodes);
+      g.userData.mats = mats;
+      g.visible = false;
+      master.add(g);
+      return g;
+    }
+
+    const shapes = [
+      makeShape(new THREE.IcosahedronGeometry(2.5, 1), new THREE.IcosahedronGeometry(1.55, 0)),          // 0 hero — red neuronal
+      makeShape(new THREE.TorusKnotGeometry(1.6, 0.42, 72, 10), new THREE.OctahedronGeometry(0.9, 0), 0.05), // 1 servicios — nudo
+      makeShape(new THREE.OctahedronGeometry(2.4, 1), new THREE.OctahedronGeometry(1.35, 0), 0.07),      // 2 antes/después — cristal
+      makeShape(new THREE.TorusGeometry(2.1, 0.55, 10, 30), new THREE.TorusGeometry(1.1, 0.3, 8, 20), 0.055), // 3 proceso — giroscopio
+      makeShape(new THREE.DodecahedronGeometry(2.3, 0), new THREE.SphereGeometry(1.25, 10, 8), 0.08)     // 4 faq — dodecaedro
+    ];
+
+    // Partículas de fondo (siempre presentes)
     const pGeo = new THREE.BufferGeometry();
     const pArr = [];
     for (let i = 0; i < 180; i++) {
@@ -1660,9 +1682,59 @@ const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matc
     }
     pGeo.setAttribute('position', new THREE.Float32BufferAttribute(pArr, 3));
     const particles = new THREE.Points(pGeo, new THREE.PointsMaterial({
-      color: 0x7C6CFF, size: 0.035, transparent: true, opacity: 0.55
+      color: VIOLET, size: 0.035, transparent: true, opacity: 0.55
     }));
     scene.add(particles);
+
+    // ── Keyframes por sección: posición, escala, forma y rotación ──
+    // x se multiplica por xf (según ancho de pantalla) para que en mobile quede centrado detrás del contenido
+    const keyDefs = [
+      { sel: '.hero',             x: 0,    y: 0,    s: 1.0,  shape: 0, rot: 0,   fade: 1 },
+      { sel: '#servicios',        x: 3.0,  y: 0.1,  s: 0.8,  shape: 1, rot: 2.2, fade: 1 },
+      { sel: '#antes-despues',    x: -3.0, y: 0,    s: 0.85, shape: 2, rot: 4.4, fade: 1 },
+      { sel: '#como-trabajamos',  x: 3.0,  y: 0.2,  s: 0.9,  shape: 3, rot: 6.6, fade: 1 },
+      { sel: '#faq',              x: -2.8, y: 0.3,  s: 0.75, shape: 4, rot: 8.8, fade: 1 },
+      { sel: '#contacto',         x: 0,    y: 0.15, s: 1.05, shape: 0, rot: 11,  fade: 0.8 }
+    ];
+    let keys = [];
+    function measure() {
+      keys = keyDefs.map(k => {
+        const el = document.querySelector(k.sel);
+        if (!el) return null;
+        const r = el.getBoundingClientRect();
+        return Object.assign({}, k, { c: r.top + window.scrollY + r.height / 2 });
+      }).filter(Boolean);
+    }
+    measure();
+    window.addEventListener('load', measure);
+
+    function smooth(t) { return t * t * (3 - 2 * t); }
+
+    // Estado actual (interpolado por frame para suavidad)
+    const cur = { x: 0, y: 0, s: 1, rot: 0, fade: 0, w: shapes.map((_, i) => i === 0 ? 1 : 0) };
+    const tgt = { x: 0, y: 0, s: 1, rot: 0, fade: 1, w: cur.w.slice() };
+
+    function computeTarget() {
+      if (!keys.length) return;
+      const vc = window.scrollY + window.innerHeight / 2;
+      let j = 0;
+      while (j < keys.length - 1 && vc > keys[j + 1].c) j++;
+      const a = keys[j], b = keys[Math.min(j + 1, keys.length - 1)];
+      const span = Math.max(1, b.c - a.c);
+      const t = a === b ? 0 : smooth(Math.min(1, Math.max(0, (vc - a.c) / span)));
+      const xf = Math.min(1, (W / H) * 0.62); // en pantallas angostas, el objeto se queda cerca del centro
+      tgt.x = (a.x + (b.x - a.x) * t) * xf;
+      tgt.y = a.y + (b.y - a.y) * t;
+      tgt.s = (a.s + (b.s - a.s) * t) * (W < 640 ? 0.78 : 1);
+      tgt.rot = a.rot + (b.rot - a.rot) * t;
+      tgt.fade = a.fade + (b.fade - a.fade) * t;
+      const w = shapes.map(() => 0);
+      w[a.shape] += 1 - t;
+      w[b.shape] += t;
+      tgt.w = w;
+    }
+    computeTarget();
+    window.addEventListener('scroll', computeTarget, { passive: true });
 
     // Parallax con el puntero
     let tx = 0, ty = 0, cx = 0, cy = 0;
@@ -1671,32 +1743,56 @@ const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matc
       ty = (e.clientY / window.innerHeight - 0.5) * 0.35;
     }, { passive: true });
 
-    let visible = true;
-    new IntersectionObserver(en => { visible = en[0].isIntersecting; }, { threshold: 0.05 }).observe(mount);
-
     window.addEventListener('resize', () => {
-      W = mount.clientWidth; H = mount.clientHeight;
+      W = window.innerWidth; H = window.innerHeight;
       camera.aspect = W / H;
       camera.updateProjectionMatrix();
       renderer.setSize(W, H);
+      measure();
+      computeTarget();
     });
 
+    let running = true;
+    document.addEventListener('visibilitychange', () => { running = !document.hidden; });
+
     const clock = new THREE.Clock();
+    const E = 0.07; // suavizado
     function loop() {
       requestAnimationFrame(loop);
-      if (!visible) return;
+      if (!running) return;
       const t = clock.getElapsedTime();
-      const sc = window.__scrollT || 0;
+
+      cur.x += (tgt.x - cur.x) * E;
+      cur.y += (tgt.y - cur.y) * E;
+      cur.s += (tgt.s - cur.s) * E;
+      cur.rot += (tgt.rot - cur.rot) * E;
+      cur.fade += (tgt.fade - cur.fade) * E;
       cx += (tx - cx) * 0.04;
       cy += (ty - cy) * 0.04;
-      group.rotation.y = t * 0.12 + cx + sc * 2.4;
-      group.rotation.x = Math.sin(t * 0.18) * 0.12 + cy + sc * 0.6;
-      wire2.rotation.y = -t * 0.2 - sc * 3;
-      wire2.rotation.z = t * 0.1;
-      particles.rotation.y = t * 0.02 + sc * 0.4;
-      const s = 1 - sc * 0.3;
-      group.scale.set(s, s, s);
-      group.position.y = Math.sin(t * 0.5) * 0.12 + sc * 1.6;
+
+      master.position.set(cur.x, cur.y + Math.sin(t * 0.5) * 0.12, 0);
+      master.scale.set(cur.s, cur.s, cur.s);
+      master.rotation.y = t * 0.12 + cx + cur.rot;
+      master.rotation.x = Math.sin(t * 0.18) * 0.12 + cy + cur.rot * 0.12;
+
+      for (let i = 0; i < shapes.length; i++) {
+        cur.w[i] += (tgt.w[i] - cur.w[i]) * E;
+        const wgt = cur.w[i] * cur.fade;
+        const sh = shapes[i];
+        sh.visible = wgt > 0.015;
+        if (!sh.visible) continue;
+        sh.userData.mats.forEach(x => { x.m.opacity = x.base * wgt; });
+        // aparición con leve zoom para que el morph se sienta físico
+        const pop = 0.82 + 0.18 * Math.min(1, cur.w[i]);
+        sh.scale.set(pop, pop, pop);
+        sh.rotation.y = t * (0.1 + i * 0.04);
+        if (sh.userData.inner) {
+          sh.userData.inner.rotation.y = -t * 0.25;
+          sh.userData.inner.rotation.z = t * 0.12;
+        }
+      }
+
+      particles.rotation.y = t * 0.02 + cur.rot * 0.06;
       renderer.render(scene, camera);
     }
     loop();
