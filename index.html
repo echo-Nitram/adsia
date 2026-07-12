@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -6,19 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ADSIA — Agencia de IA para PyMEs uruguayas</title>
 <meta name="description" content="ADSIA aplica IA a tu negocio con resultados medibles: Meta Ads con capa de IA, automatización con agentes y consultoría de IA para PyMEs uruguayas y argentinas. Diagnóstico gratuito.">
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #05060B;
     --surface: #0E1118;
     --surface2: #141820;
-    --border: rgba(255,255,255,0.07);
+    --border: rgba(255,255,255,0.08);
     --accent: #00E5FF;
-    --accent2: #7B61FF;
-    --accent3: #FF4D6D;
+    --accent-dim: rgba(0,229,255,0.12);
     --text: #F0F2F5;
-    --muted: #6B7280;
-    --muted2: #9CA3AF;
+    --muted: #7B8494;
+    --muted2: #A6ADBB;
+    --green: #34D399;
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -28,203 +28,158 @@
   body {
     background: var(--bg);
     color: var(--text);
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 300;
-    overflow-x: hidden;
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-weight: 400;
     line-height: 1.6;
+    overflow-x: hidden;
   }
 
-  ::selection { background: rgba(0,229,255,0.25); color: #FFFFFF; }
+  ::selection { background: rgba(0,229,255,0.25); color: #fff; }
 
-  /* ── NOISE OVERLAY ── */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 9990;
-    opacity: 0.4;
-  }
-
-  /* ── GRID BACKGROUND ── */
-  .grid-bg {
-    position: fixed;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(0,229,255,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0,229,255,0.03) 1px, transparent 1px);
-    background-size: 60px 60px;
-    pointer-events: none;
-    z-index: 0;
-    animation: gridDrift 12s linear infinite;
-  }
-
-  /* ── FX LAYER: particles, cursor, progress ── */
-  #fx-particles {
-    position: fixed;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-    pointer-events: none;
-  }
-
-  #fx-cursor-glow {
-    position: fixed;
-    width: 520px; height: 520px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(0,229,255,0.07) 0%, rgba(123,97,255,0.05) 40%, transparent 70%);
-    pointer-events: none;
-    z-index: 1;
-    top: 0; left: 0;
-    transform: translate(-50%, -50%);
-    opacity: 0;
-  }
-
-  #fx-cursor-dot {
-    position: fixed;
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    background: var(--accent);
-    box-shadow: 0 0 12px rgba(0,229,255,0.8);
-    pointer-events: none;
-    z-index: 9991;
-    top: 0; left: 0;
-    transform: translate(-50%, -50%);
-    opacity: 0;
-  }
-
-  #fx-progress {
-    position: fixed;
-    top: 0; left: 0;
-    height: 2px;
-    width: 0%;
-    background: linear-gradient(90deg, var(--accent), var(--accent2));
-    z-index: 9992;
-    box-shadow: 0 0 12px rgba(0,229,255,0.6);
-  }
+  a { color: var(--accent); }
+  a:hover { color: #7FF1FF; }
 
   /* ── NAV ── */
   nav {
     position: fixed;
     top: 0; left: 0; right: 0;
     z-index: 100;
-    padding: 20px 40px;
+    padding: 14px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: rgba(5,6,11,0.75);
-    backdrop-filter: blur(20px);
+    gap: 16px;
+    background: rgba(5,6,11,0.85);
+    backdrop-filter: blur(16px);
     border-bottom: 1px solid var(--border);
   }
 
   .logo {
     font-family: 'Syne', sans-serif;
     font-weight: 800;
-    font-size: 1.5rem;
+    font-size: 1.35rem;
     letter-spacing: -0.02em;
-    background: linear-gradient(135deg, var(--accent), var(--accent2));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--text);
+    text-decoration: none;
   }
+  .logo em { font-style: normal; color: var(--accent); }
 
-  .logo span {
-    background: var(--text);
-    -webkit-background-clip: text;
-    background-clip: text;
-  }
-
-  nav ul {
-    display: flex;
-    gap: 32px;
+  .nav-links {
+    display: none;
+    gap: 28px;
     list-style: none;
   }
-
-  nav a {
+  .nav-links a {
     color: var(--muted2);
     text-decoration: none;
     font-size: 0.875rem;
-    font-weight: 400;
     transition: color 0.2s;
-    letter-spacing: 0.02em;
   }
-
-  nav a:hover { color: var(--text); }
+  .nav-links a:hover { color: var(--text); }
 
   .nav-cta {
     background: var(--accent);
-    color: var(--bg) !important;
-    padding: 10px 22px;
-    border-radius: 6px;
-    font-weight: 500 !important;
-    transition: opacity 0.2s !important;
+    color: var(--bg);
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 0.875rem;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: opacity 0.2s;
   }
-  .nav-cta:hover { opacity: 0.85; }
+  .nav-cta:hover { opacity: 0.85; color: var(--bg); }
+
+  @media (min-width: 860px) {
+    nav { padding: 16px 40px; }
+    .nav-links { display: flex; }
+  }
+
+  /* ── BOTONES ── */
+  .btn-primary {
+    background: var(--accent);
+    color: var(--bg);
+    border: none;
+    padding: 16px 32px;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 0 32px rgba(0,229,255,0.22);
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 48px rgba(0,229,255,0.35);
+    color: var(--bg);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+    padding: 16px 32px;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 1rem;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .btn-secondary:hover {
+    border-color: rgba(255,255,255,0.25);
+    background: rgba(255,255,255,0.04);
+    color: var(--text);
+  }
 
   /* ── HERO ── */
   .hero {
     position: relative;
-    min-height: 100vh;
+    padding: 130px 20px 56px;
+    text-align: center;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    text-align: center;
-    padding: 120px 24px 80px;
-    z-index: 1;
     overflow: hidden;
   }
 
-  .hero-glow {
+  .hero::before {
+    content: '';
     position: absolute;
-    width: 800px; height: 800px;
+    width: 720px; height: 720px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(0,229,255,0.08) 0%, rgba(123,97,255,0.05) 40%, transparent 70%);
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(0,229,255,0.09) 0%, rgba(0,229,255,0.03) 45%, transparent 70%);
+    top: -180px; left: 50%;
+    transform: translateX(-50%);
     pointer-events: none;
-    animation: breathe 7s ease-in-out infinite;
-  }
-
-  .hero-blob-1 {
-    position: absolute;
-    width: 280px; height: 280px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(123,97,255,0.12) 0%, transparent 70%);
-    top: 18%; left: 12%;
-    pointer-events: none;
-    animation: floatY 9s ease-in-out infinite;
-  }
-
-  .hero-blob-2 {
-    position: absolute;
-    width: 220px; height: 220px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(255,77,109,0.08) 0%, transparent 70%);
-    bottom: 14%; right: 10%;
-    pointer-events: none;
-    animation: floatY2 11s ease-in-out infinite;
   }
 
   .hero-badge {
+    position: relative;
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: rgba(0,229,255,0.08);
-    border: 1px solid rgba(0,229,255,0.2);
+    background: var(--accent-dim);
+    border: 1px solid rgba(0,229,255,0.25);
     border-radius: 100px;
-    padding: 6px 16px;
-    font-size: 0.75rem;
+    padding: 6px 14px;
+    font-size: 0.72rem;
     font-weight: 500;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.07em;
     text-transform: uppercase;
     color: var(--accent);
-    margin-bottom: 32px;
-    animation: fadeInDown 0.6s ease both;
+    margin-bottom: 28px;
   }
-
   .hero-badge .dot {
     width: 6px; height: 6px;
     border-radius: 50%;
@@ -233,568 +188,500 @@
   }
 
   .hero h1 {
+    position: relative;
     font-family: 'Syne', sans-serif;
     font-weight: 800;
-    font-size: clamp(2rem, 8.5vw, 5.5rem);
-    line-height: 1.08;
+    font-size: clamp(2.1rem, 7.5vw, 4.6rem);
+    line-height: 1.1;
     letter-spacing: -0.03em;
-    max-width: 900px;
-    overflow-wrap: break-word;
-    margin-bottom: 24px;
+    max-width: 860px;
+    margin-bottom: 20px;
   }
+  .hero h1 .highlight { color: var(--accent); }
 
-  .hero h1 .word {
-    display: inline-block;
-    animation: wordIn 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
-  }
-
-  .hero h1 .highlight {
-    background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .hero p {
-    font-size: clamp(1rem, 2vw, 1.2rem);
+  .hero > p {
+    position: relative;
+    font-size: clamp(1rem, 2vw, 1.15rem);
     color: var(--muted2);
-    max-width: 560px;
-    margin-bottom: 48px;
-    font-weight: 300;
+    max-width: 540px;
+    margin-bottom: 36px;
     line-height: 1.7;
-    animation: fadeInUp 0.7s ease 0.55s both;
   }
 
   .hero-actions {
+    position: relative;
     display: flex;
-    gap: 16px;
+    gap: 14px;
     flex-wrap: wrap;
     justify-content: center;
-    animation: fadeInUp 0.7s ease 0.7s both;
+    width: 100%;
+    max-width: 480px;
+  }
+  .hero-actions .btn-primary { flex: 1 1 100%; }
+  .hero-actions .btn-secondary { flex: 1 1 100%; }
+
+  @media (min-width: 560px) {
+    .hero-actions .btn-primary,
+    .hero-actions .btn-secondary { flex: 0 1 auto; }
   }
 
-  .scroll-cue {
-    position: absolute;
-    bottom: 28px; left: 50%;
-    transform: translateX(-50%);
+  .hero-trust {
+    position: relative;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    animation: fadeInUp 1s ease 1.4s both;
-  }
-
-  .scroll-cue .label {
-    font-size: 0.65rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
+    gap: 10px 22px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 24px;
+    font-size: 0.82rem;
     color: var(--muted);
   }
+  .hero-trust span { display: inline-flex; align-items: center; gap: 7px; }
+  .hero-trust svg { flex-shrink: 0; }
 
-  .scroll-cue .line {
-    display: block;
-    width: 1px; height: 34px;
-    background: linear-gradient(to bottom, rgba(0,229,255,0.6), transparent);
-    animation: pulse 2s infinite;
-  }
-
-  .btn-primary {
-    position: relative;
-    overflow: hidden;
-    background: var(--accent);
-    color: var(--bg);
-    border: none;
-    padding: 16px 36px;
-    border-radius: 8px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 1rem;
-    font-weight: 500;
-    cursor: pointer;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    transition: transform 0.2s, box-shadow 0.2s;
-    box-shadow: 0 0 40px rgba(0,229,255,0.25);
-  }
-  .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 0 60px rgba(0,229,255,0.4);
-  }
-  .btn-primary::after {
-    content: '';
-    position: absolute;
-    top: 0; bottom: 0;
-    width: 40%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
-    animation: shine 3.2s ease-in-out infinite;
-  }
-
-  .btn-secondary {
-    background: transparent;
-    color: var(--text);
-    border: 1px solid var(--border);
-    padding: 16px 36px;
-    border-radius: 8px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 1rem;
-    font-weight: 400;
-    cursor: pointer;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    transition: border-color 0.2s, background 0.2s;
-  }
-  .btn-secondary:hover {
-    border-color: rgba(255,255,255,0.2);
-    background: rgba(255,255,255,0.04);
-  }
-
-  /* ── DEMO SCREEN ── */
-  .demo-wrapper {
-    position: relative;
-    z-index: 1;
-    padding: 0 24px 100px;
-    max-width: 900px;
+  /* ── LA IA TRABAJANDO ── */
+  .proof-wrapper {
+    padding: 0 16px 90px;
+    max-width: 1080px;
     margin: 0 auto;
-    animation: fadeInUp 0.8s ease 0.5s both;
   }
 
-  .demo-screen {
+  .proof-caption {
+    text-align: center;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 18px;
+  }
+
+  .proof-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  @media (min-width: 860px) { .proof-grid { grid-template-columns: repeat(3, 1fr); gap: 18px; } }
+
+  .proof-card {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 16px;
-    overflow: hidden;
-    box-shadow:
-      0 0 0 1px rgba(0,229,255,0.05),
-      0 40px 80px rgba(0,0,0,0.6),
-      0 0 120px rgba(0,229,255,0.06);
-    transform-style: preserve-3d;
-  }
-
-  .demo-topbar {
-    background: var(--surface2);
-    padding: 12px 20px;
+    padding: 22px;
     display: flex;
-    align-items: center;
-    gap: 12px;
-    border-bottom: 1px solid var(--border);
+    flex-direction: column;
+    gap: 14px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.4);
   }
 
-  .demo-dots { display: flex; gap: 6px; }
-  .demo-dots span {
-    width: 10px; height: 10px; border-radius: 50%;
-  }
-  .demo-dots span:nth-child(1) { background: #FF5F57; }
-  .demo-dots span:nth-child(2) { background: #FFBD2E; }
-  .demo-dots span:nth-child(3) { background: #28CA41; }
-
-  .demo-title {
-    font-size: 0.75rem;
-    color: var(--muted);
-    font-weight: 400;
-    flex: 1;
-    text-align: center;
-  }
-
-  .demo-live {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 0.65rem;
-    letter-spacing: 0.1em;
+  .proof-tag {
+    display: inline-flex;
+    align-self: flex-start;
+    background: var(--accent-dim);
+    border: 1px solid rgba(0,229,255,0.22);
+    border-radius: 100px;
+    padding: 4px 12px;
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--accent);
   }
-  .demo-live .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); animation: pulse 1.6s infinite; }
 
-  .demo-body {
-    padding: 28px;
-    font-size: 0.875rem;
-    min-height: 380px;
-  }
-
-  .chat-msg {
+  .proof-alert {
     display: flex;
-    gap: 12px;
-    margin-bottom: 20px;
-  }
-
-  .chat-avatar {
-    width: 32px; height: 32px;
-    border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 0.75rem;
-    font-weight: 600;
-    flex-shrink: 0;
-    font-family: 'Syne', sans-serif;
-  }
-
-  .avatar-user {
-    background: linear-gradient(135deg, var(--accent2), var(--accent3));
-    color: white;
-  }
-  .avatar-ai {
-    background: linear-gradient(135deg, var(--accent), var(--accent2));
-    color: var(--bg);
-  }
-
-  .chat-bubble {
+    gap: 11px;
+    align-items: flex-start;
     background: var(--surface2);
     border: 1px solid var(--border);
     border-radius: 12px;
-    padding: 12px 16px;
-    max-width: 85%;
-    line-height: 1.6;
-    color: var(--muted2);
+    padding: 14px;
   }
-
-  .chat-bubble.ai {
-    background: rgba(0,229,255,0.05);
-    border-color: rgba(0,229,255,0.15);
-    color: var(--text);
-  }
-
-  .chat-bubble strong {
-    color: var(--accent);
-    font-weight: 500;
-  }
-
-  .chat-bubble .tag {
-    display: inline-block;
-    background: rgba(0,229,255,0.1);
-    border: 1px solid rgba(0,229,255,0.2);
-    border-radius: 4px;
-    padding: 2px 8px;
-    font-size: 0.75rem;
-    color: var(--accent);
-    margin: 4px 4px 0 0;
-  }
-
-  .chat-typing {
-    display: none;
-    gap: 12px;
-    margin-bottom: 20px;
-    align-items: center;
-  }
-  .chat-typing .bubble {
-    background: rgba(0,229,255,0.05);
-    border: 1px solid rgba(0,229,255,0.15);
-    border-radius: 12px;
-    padding: 14px 18px;
-    display: flex;
-    gap: 5px;
-  }
-  .chat-typing .bubble span {
-    width: 6px; height: 6px;
+  .proof-dot {
+    width: 9px; height: 9px;
     border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 5px;
+    background: #FF5F57;
+    box-shadow: 0 0 10px rgba(255,95,87,0.5);
+  }
+  .proof-alert strong {
+    display: block;
+    font-weight: 500;
+    font-size: 0.85rem;
+    color: var(--text);
+    margin-bottom: 3px;
+    line-height: 1.4;
+  }
+  .proof-alert p { font-size: 0.78rem; color: var(--muted2); line-height: 1.5; }
+
+  .proof-chip {
+    display: inline-flex;
+    align-self: flex-start;
+    background: var(--accent-dim);
+    border: 1px solid rgba(0,229,255,0.22);
+    border-radius: 6px;
+    padding: 5px 11px;
+    font-size: 0.74rem;
+    font-weight: 500;
+    color: var(--accent);
+  }
+
+  .proof-chat { display: flex; flex-direction: column; gap: 8px; }
+  .proof-bubble {
+    border-radius: 12px;
+    padding: 10px 13px;
+    font-size: 0.82rem;
+    line-height: 1.5;
+    max-width: 92%;
+  }
+  .proof-bubble .who {
+    display: block;
+    font-size: 0.66rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 3px;
+  }
+  .proof-bubble.in {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--muted2);
+    align-self: flex-start;
+    border-bottom-left-radius: 4px;
+  }
+  .proof-bubble.out {
+    background: rgba(0,229,255,0.06);
+    border: 1px solid rgba(0,229,255,0.18);
+    color: var(--text);
+    align-self: flex-end;
+    border-bottom-right-radius: 4px;
+  }
+  .proof-bubble.out .who { color: var(--accent); }
+
+  .proof-plan {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+  }
+  .proof-plan-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.78rem;
+    color: var(--text);
+    margin-bottom: 2px;
+  }
+  .proof-task {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 0.8rem;
+    color: var(--muted2);
+    line-height: 1.4;
+  }
+  .proof-task::before {
+    content: '';
+    width: 15px; height: 15px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+  .proof-task.done { color: var(--text); }
+  .proof-task.done::before {
+    content: '✓';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.62rem;
+    color: var(--bg);
     background: var(--accent);
-    animation: typingDot 1.1s infinite;
+    border-color: var(--accent);
   }
-  .chat-typing .bubble span:nth-child(2) { animation-delay: 0.18s; }
-  .chat-typing .bubble span:nth-child(3) { animation-delay: 0.36s; }
+  .proof-task .prio {
+    margin-left: auto;
+    font-size: 0.64rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
 
-  /* ── SECTION COMMONS ── */
-  section {
-    position: relative;
-    z-index: 1;
+  .proof-note {
+    margin-top: auto;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+    font-size: 0.78rem;
+    color: var(--muted);
+    line-height: 1.55;
   }
 
-  .container {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 24px;
-  }
+  /* ── SECCIONES ── */
+  section { position: relative; }
+
+  .container { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
 
   .section-label {
     font-size: 0.7rem;
-    font-weight: 600;
+    font-weight: 500;
     letter-spacing: 0.15em;
     text-transform: uppercase;
     color: var(--accent);
-    margin-bottom: 16px;
+    margin-bottom: 14px;
   }
 
   .section-title {
     font-family: 'Syne', sans-serif;
     font-weight: 700;
-    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-size: clamp(1.7rem, 4vw, 2.6rem);
     letter-spacing: -0.02em;
     line-height: 1.2;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
   }
 
   .section-sub {
     color: var(--muted2);
-    font-size: 1.05rem;
-    max-width: 500px;
+    font-size: 1rem;
+    max-width: 520px;
     line-height: 1.7;
   }
 
-  /* ── HOW IT WORKS ── */
-  .how {
-    padding: 100px 0;
-    border-top: 1px solid var(--border);
-  }
+  .center { text-align: center; }
+  .center .section-sub { margin-left: auto; margin-right: auto; }
 
-  .how-grid {
+  /* ── SERVICIOS ── */
+  .services { padding: 80px 0; border-top: 1px solid var(--border); }
+  .services-header { text-align: center; margin-bottom: 48px; }
+
+  .services-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: center;
-    margin-top: 60px;
+    grid-template-columns: 1fr;
+    gap: 16px;
   }
+  @media (min-width: 860px) { .services-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; } }
 
-  .steps {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-  }
-
-  .step {
-    display: flex;
-    gap: 20px;
-    position: relative;
-    padding-bottom: 36px;
-  }
-
-  .step:last-child { padding-bottom: 0; }
-
-  .step-line {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    flex-shrink: 0;
-  }
-
-  .step-num {
-    width: 36px; height: 36px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--accent), var(--accent2));
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 0.8rem;
-    color: var(--bg);
-    flex-shrink: 0;
-    box-shadow: 0 0 24px rgba(0,229,255,0.3);
-  }
-
-  .step-connector {
-    width: 1px;
-    flex: 1;
-    background: linear-gradient(to bottom, rgba(0,229,255,0.3), transparent);
-    margin-top: 8px;
-  }
-
-  .step:last-child .step-connector { display: none; }
-
-  .step-content h3 {
-    font-family: 'Syne', sans-serif;
-    font-weight: 600;
-    font-size: 1rem;
-    margin-bottom: 6px;
-    color: var(--text);
-  }
-
-  .step-content p {
-    font-size: 0.875rem;
-    color: var(--muted2);
-    line-height: 1.6;
-  }
-
-  .how-visual {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 32px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
-    transform-style: preserve-3d;
-  }
-
-  .req-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 14px 0;
-    border-bottom: 1px solid var(--border);
-    font-size: 0.875rem;
-  }
-  .req-item:last-child { border-bottom: none; }
-
-  .req-icon {
-    width: 36px; height: 36px;
-    border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.1rem;
-    flex-shrink: 0;
-  }
-  .req-icon.blue { background: rgba(0,229,255,0.1); }
-  .req-icon.purple { background: rgba(123,97,255,0.1); }
-  .req-icon.green { background: rgba(0,230,118,0.1); }
-
-  .req-text { flex: 1; color: var(--muted2); }
-  .req-text strong { color: var(--text); display: block; font-weight: 500; font-size: 0.875rem; }
-
-  /* ── TESTIMONIALS ── */
-  .testimonials {
-    padding: 100px 0;
-    border-top: 1px solid var(--border);
-  }
-
-  .testimonials-header {
-    text-align: center;
-    margin-bottom: 24px;
-  }
-
-  .placeholder-note {
-    max-width: 560px;
-    margin: 0 auto 48px;
-    text-align: center;
-    font-size: 0.8rem;
-    color: var(--muted);
-    background: rgba(255,255,255,0.03);
-    border: 1px dashed var(--border);
-    border-radius: 10px;
-    padding: 10px 16px;
-  }
-
-  .testimonial-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-  }
-
-  .testimonial-card {
+  .service-card {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 16px;
     padding: 28px;
-    position: relative;
-    transform-style: preserve-3d;
+    display: flex;
+    flex-direction: column;
+    transition: border-color 0.25s;
   }
+  .service-card:hover { border-color: rgba(0,229,255,0.25); }
 
-  .testimonial-tag {
-    position: absolute;
-    top: 16px; right: 16px;
-    font-size: 0.65rem;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    color: var(--muted);
-    border: 1px solid var(--border);
-    border-radius: 100px;
-    padding: 3px 10px;
-  }
-
-  .testimonial-metric {
-    display: inline-block;
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: 1.4rem;
+  .service-icon {
+    width: 42px; height: 42px;
+    border-radius: 10px;
+    background: var(--accent-dim);
+    border: 1px solid rgba(0,229,255,0.2);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 18px;
     color: var(--accent);
-    margin-bottom: 12px;
   }
 
-  .testimonial-quote {
+  .service-card h3 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.12rem;
+    margin-bottom: 10px;
+  }
+
+  .service-card > p {
     font-size: 0.875rem;
     color: var(--muted2);
     line-height: 1.65;
     margin-bottom: 20px;
   }
 
-  .testimonial-author {
+  .service-items {
+    list-style: none;
     display: flex;
-    align-items: center;
-    gap: 12px;
+    flex-direction: column;
+    gap: 9px;
+    margin-bottom: 24px;
+    flex: 1;
+  }
+  .service-items li {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    font-size: 0.82rem;
+    color: var(--muted2);
+    line-height: 1.5;
+  }
+  .service-items li::before {
+    content: '✓';
+    color: var(--accent);
+    font-weight: 500;
+    flex-shrink: 0;
   }
 
-  .testimonial-avatar {
-    width: 36px; height: 36px;
+  .service-link {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--accent);
+    text-decoration: none;
+  }
+  .service-link:hover { text-decoration: underline; }
+
+  /* ── ANTES / DESPUÉS ── */
+  .compare { padding: 80px 0; border-top: 1px solid var(--border); }
+  .compare-header { text-align: center; margin-bottom: 48px; }
+
+  .compare-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  .compare-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+  @media (min-width: 720px) { .compare-row { grid-template-columns: 1fr 1fr; } }
+
+  .compare-cell { padding: 22px 24px; }
+
+  .compare-cell .tag-line {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .compare-before { border-bottom: 1px solid var(--border); }
+  .compare-before .tag-line { color: var(--muted); }
+  .compare-before p { color: var(--muted2); font-size: 0.9rem; line-height: 1.65; }
+
+  .compare-after { background: rgba(0,229,255,0.035); }
+  .compare-after .tag-line { color: var(--accent); }
+  .compare-after p { color: var(--text); font-size: 0.9rem; line-height: 1.65; }
+
+  @media (min-width: 720px) {
+    .compare-before { border-bottom: none; border-right: 1px solid var(--border); }
+  }
+
+  .compare-service {
+    font-size: 0.72rem;
+    color: var(--muted);
+    margin-top: 8px;
+  }
+  .compare-service a { color: var(--muted2); text-decoration: none; }
+  .compare-service a:hover { color: var(--accent); }
+
+  /* ── CÓMO TRABAJAMOS ── */
+  .how { padding: 80px 0; border-top: 1px solid var(--border); }
+
+  .how-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+  @media (min-width: 860px) { .how-grid { grid-template-columns: 1fr 1fr; gap: 72px; } }
+
+  .steps { display: flex; flex-direction: column; margin-top: 36px; }
+
+  .step { display: flex; gap: 18px; padding-bottom: 32px; }
+  .step:last-child { padding-bottom: 0; }
+
+  .step-line { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
+  .step-num {
+    width: 34px; height: 34px;
     border-radius: 50%;
-    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    background: var(--accent);
     display: flex; align-items: center; justify-content: center;
     font-family: 'Syne', sans-serif;
     font-weight: 700;
     font-size: 0.8rem;
     color: var(--bg);
-    flex-shrink: 0;
   }
-
-  .testimonial-author strong {
-    display: block;
-    font-size: 0.85rem;
-    color: var(--text);
-    font-weight: 500;
+  .step-connector {
+    width: 1px; flex: 1;
+    background: linear-gradient(to bottom, rgba(0,229,255,0.35), transparent);
+    margin-top: 8px;
   }
+  .step:last-child .step-connector { display: none; }
 
-  .testimonial-author span {
-    display: block;
-    font-size: 0.75rem;
-    color: var(--muted);
-  }
-
-  /* ── PRICING ── */
-  .pricing {
-    padding: 100px 0;
-    border-top: 1px solid var(--border);
-  }
-
-  .pricing-header {
-    text-align: center;
-    margin-bottom: 64px;
-  }
-
-  /* ── GUARANTEE BANNER ── */
-  .guarantee-banner {
-    max-width: 900px;
-    margin: 40px auto 0;
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    padding: 24px 28px;
-    background: rgba(0,230,118,0.05);
-    border: 1px solid rgba(0,230,118,0.2);
-    border-radius: 14px;
-  }
-
-  .guarantee-icon {
-    font-size: 1.8rem;
-    flex-shrink: 0;
-  }
-
-  .guarantee-text strong {
-    display: block;
+  .step-content h3 {
     font-family: 'Syne', sans-serif;
     font-weight: 700;
-    font-size: 0.95rem;
-    color: var(--text);
-    margin-bottom: 4px;
+    font-size: 1rem;
+    margin-bottom: 6px;
+  }
+  .step-content p { font-size: 0.875rem; color: var(--muted2); line-height: 1.65; }
+
+  .how-visual {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 26px;
+  }
+  .how-visual-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.92rem;
+    margin-bottom: 18px;
   }
 
-  .guarantee-text p {
+  .req-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 13px 0;
+    border-bottom: 1px solid var(--border);
     font-size: 0.85rem;
-    color: var(--muted2);
-    line-height: 1.5;
+  }
+  .req-item:last-of-type { border-bottom: none; }
+  .req-icon {
+    width: 34px; height: 34px;
+    border-radius: 8px;
+    background: var(--accent-dim);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    color: var(--accent);
+  }
+  .req-text { flex: 1; color: var(--muted); line-height: 1.5; }
+  .req-text strong { color: var(--text); display: block; font-weight: 500; }
+
+  .diag-box {
+    margin-top: 20px;
+    padding: 18px;
+    background: rgba(0,229,255,0.05);
+    border: 1px solid rgba(0,229,255,0.18);
+    border-radius: 12px;
+  }
+  .diag-box .k { font-size: 0.72rem; color: var(--muted); }
+  .diag-box .v {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1.3;
   }
 
   /* ── FAQ ── */
-  .faq {
-    padding: 100px 0;
-    border-top: 1px solid var(--border);
-  }
-
-  .faq-header {
-    text-align: center;
-    margin-bottom: 60px;
-  }
+  .faq { padding: 80px 0; border-top: 1px solid var(--border); }
+  .faq-header { text-align: center; margin-bottom: 44px; }
 
   .faq-list {
-    max-width: 700px;
+    max-width: 680px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 6px;
   }
 
   .faq-item {
@@ -805,458 +692,228 @@
   }
 
   .faq-q {
-    padding: 20px 24px;
+    width: 100%;
+    padding: 18px 20px;
     cursor: pointer;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 14px;
+    font-family: inherit;
     font-weight: 500;
-    font-size: 0.95rem;
+    font-size: 0.92rem;
     color: var(--text);
-    user-select: none;
+    background: none;
+    border: none;
+    text-align: left;
     transition: background 0.2s;
   }
-
   .faq-q:hover { background: rgba(255,255,255,0.03); }
 
   .faq-q .arrow {
-    width: 20px; height: 20px;
+    width: 22px; height: 22px;
     border-radius: 50%;
     border: 1px solid var(--border);
     display: flex; align-items: center; justify-content: center;
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     color: var(--muted2);
-    transition: transform 0.3s, border-color 0.2s;
+    transition: transform 0.3s, border-color 0.2s, color 0.2s;
     flex-shrink: 0;
   }
-
-  .faq-item.open .faq-q .arrow {
-    transform: rotate(180deg);
-    border-color: var(--accent);
-    color: var(--accent);
-  }
+  .faq-item.open .arrow { transform: rotate(180deg); border-color: var(--accent); color: var(--accent); }
 
   .faq-a {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.4s ease, padding 0.3s ease;
+    transition: max-height 0.35s ease, padding 0.25s ease;
     font-size: 0.875rem;
     color: var(--muted2);
     line-height: 1.7;
-    padding: 0 24px;
+    padding: 0 20px;
   }
+  .faq-item.open .faq-a { max-height: 320px; padding: 0 20px 18px; }
 
-  .faq-item.open .faq-a {
-    max-height: 300px;
-    padding: 0 24px 20px;
-  }
+  /* ── CONTACTO / FORM ── */
+  .contact { padding: 90px 0 100px; border-top: 1px solid var(--border); overflow: hidden; }
 
-  /* ── CTA FINAL ── */
-  .cta-final {
-    padding: 120px 0;
-    text-align: center;
-    border-top: 1px solid var(--border);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .cta-glow {
+  .contact::before {
+    content: '';
     position: absolute;
-    width: 600px; height: 400px;
+    width: 600px; height: 420px;
     border-radius: 50%;
     background: radial-gradient(ellipse, rgba(0,229,255,0.07) 0%, transparent 70%);
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
+    top: 0; left: 50%;
+    transform: translateX(-50%);
     pointer-events: none;
-    animation: breathe 8s ease-in-out infinite;
   }
 
-  .cta-final h2 {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    letter-spacing: -0.03em;
-    line-height: 1.1;
-    margin-bottom: 20px;
+  .contact-header { text-align: center; margin-bottom: 40px; position: relative; }
+
+  .contact-box {
     position: relative;
+    max-width: 560px;
+    margin: 0 auto;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 22px;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.45);
   }
+  @media (min-width: 640px) { .contact-box { padding: 36px; } }
 
-  .cta-final p {
+  .field { margin-bottom: 18px; }
+  .field label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 500;
     color: var(--muted2);
-    font-size: 1.05rem;
-    margin-bottom: 40px;
-    position: relative;
+    margin-bottom: 7px;
+  }
+  .field input, .field select, .field textarea {
+    width: 100%;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 13px 14px;
+    font-family: inherit;
+    font-size: 0.92rem;
+    color: var(--text);
+    transition: border-color 0.2s;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+  .field textarea { resize: vertical; min-height: 76px; }
+
+  .field-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0 16px;
+  }
+  @media (min-width: 560px) { .field-grid { grid-template-columns: 1fr 1fr; } }
+
+  #contact-submit { width: 100%; margin-top: 6px; }
+
+  .contact-alt {
+    text-align: center;
+    margin-top: 18px;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+  .contact-alt a { color: var(--accent); text-decoration: none; font-weight: 500; }
+  .contact-alt a:hover { text-decoration: underline; }
+
+  .contact-result { text-align: center; padding: 12px 0; }
+  .contact-result .icon {
+    width: 52px; height: 52px;
+    border-radius: 50%;
+    background: rgba(52,211,153,0.12);
+    border: 1px solid rgba(52,211,153,0.3);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 18px;
+    color: var(--green);
+  }
+  .contact-result h3 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+  }
+  .contact-result p {
+    font-size: 0.9rem;
+    color: var(--muted2);
+    line-height: 1.65;
+    max-width: 400px;
+    margin: 0 auto 22px;
   }
 
   /* ── FOOTER ── */
   footer {
-    padding: 40px 24px;
+    padding: 36px 20px 110px;
     border-top: 1px solid var(--border);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: relative;
-    z-index: 1;
     flex-wrap: wrap;
-    gap: 16px;
-    max-width: 1100px;
+    gap: 14px;
+    max-width: 1080px;
     margin: 0 auto;
   }
+  @media (min-width: 860px) { footer { padding-bottom: 36px; } }
 
-  .footer-logo {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: 1.1rem;
-    background: linear-gradient(135deg, var(--accent), var(--accent2));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .footer-copy {
-    font-size: 0.8rem;
-    color: var(--muted);
-  }
-
-  .footer-links {
-    display: flex;
-    gap: 24px;
-  }
-
-  .footer-links a {
-    font-size: 0.8rem;
-    color: var(--muted);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
+  .footer-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.05rem; }
+  .footer-logo em { font-style: normal; color: var(--accent); }
+  .footer-copy { font-size: 0.8rem; color: var(--muted); }
+  .footer-copy a { color: var(--muted); text-decoration: none; }
+  .footer-copy a:hover { color: var(--muted2); }
+  .footer-links { display: flex; gap: 22px; }
+  .footer-links a { font-size: 0.8rem; color: var(--muted); text-decoration: none; }
   .footer-links a:hover { color: var(--muted2); }
 
-  /* ── ANIMATIONS ── */
-  @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+  /* ── STICKY CTA MOBILE ── */
+  .sticky-cta {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    z-index: 90;
+    padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+    background: rgba(5,6,11,0.92);
+    backdrop-filter: blur(16px);
+    border-top: 1px solid var(--border);
+    transform: translateY(0);
+    transition: transform 0.3s ease;
   }
-
-  @keyframes fadeInDown {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
+  .sticky-cta.hidden { transform: translateY(110%); }
+  .sticky-cta a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: var(--accent);
+    color: var(--bg);
+    padding: 14px;
+    border-radius: 10px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    text-decoration: none;
   }
+  @media (min-width: 860px) { .sticky-cta { display: none; } }
 
+  /* ── ANIMACIONES ── */
   @keyframes pulse {
     0%, 100% { opacity: 1; }
     50% { opacity: 0.4; }
   }
 
-  @keyframes wordIn {
-    from { opacity: 0; transform: translateY(34px) skewY(2deg); filter: blur(6px); }
-    to { opacity: 1; transform: translateY(0) skewY(0); filter: blur(0); }
-  }
-
-  @keyframes floatY {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-16px); }
-  }
-
-  @keyframes floatY2 {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(12px); }
-  }
-
-  @keyframes breathe {
-    0%, 100% { opacity: 0.55; transform: translate(-50%, -50%) scale(1); }
-    50% { opacity: 1; transform: translate(-50%, -50%) scale(1.12); }
-  }
-
-  @keyframes typingDot {
-    0%, 60%, 100% { opacity: 0.25; transform: translateY(0); }
-    30% { opacity: 1; transform: translateY(-3px); }
-  }
-
-  @keyframes gridDrift {
-    from { background-position: 0px 0px; }
-    to { background-position: 0px 60px; }
-  }
-
-  @keyframes shine {
-    from { transform: translateX(-120%) skewX(-20deg); }
-    to { transform: translateX(240%) skewX(-20deg); }
-  }
-
-  /* ── SERVICES ── */
-  .services {
-    padding: 100px 0;
-    border-top: 1px solid var(--border);
-  }
-
-  .services-header {
-    text-align: center;
-    margin-bottom: 64px;
-  }
-
-  .demo-caption {
-    text-align: center;
-    font-size: 0.75rem;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 20px;
-  }
-
-  .services-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-  }
-
-  .service-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 32px;
-    position: relative;
-    overflow: hidden;
-    transform-style: preserve-3d;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .service-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, var(--accent), var(--accent2));
-    opacity: 0;
-    transition: opacity 0.3s;
-  }
-
-  .service-card:hover { border-color: rgba(0,229,255,0.2); }
-  .service-card:hover::before { opacity: 1; }
-
-  .service-num {
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 0.7rem;
-    letter-spacing: 0.12em;
-    color: var(--accent);
-    margin-bottom: 16px;
-  }
-
-  .service-icon { font-size: 1.8rem; margin-bottom: 12px; }
-
-  .service-card h3 {
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 1.15rem;
-    margin-bottom: 10px;
-    color: var(--text);
-  }
-
-  .service-card > p {
-    font-size: 0.85rem;
-    color: var(--muted2);
-    line-height: 1.65;
-    margin-bottom: 22px;
-  }
-
-  .service-items {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 9px;
-    margin-bottom: 26px;
-    flex: 1;
-  }
-
-  .service-items li {
-    display: flex;
-    align-items: flex-start;
-    gap: 9px;
-    font-size: 0.8rem;
-    color: var(--muted2);
-    line-height: 1.5;
-  }
-
-  .service-items li::before {
-    content: '✓';
-    color: var(--accent);
-    font-weight: 600;
-    flex-shrink: 0;
-    margin-top: 1px;
-  }
-
-  .service-link {
-    font-size: 0.85rem;
-    font-weight: 500;
-    color: var(--accent);
-    text-decoration: none;
-  }
-  .service-link:hover { text-decoration: underline; }
-
-  /* ── QUOTE CALCULATOR ── */
-  .quote {
-    padding: 100px 0;
-    border-top: 1px solid var(--border);
-  }
-
-  .quote-header {
-    text-align: center;
-    margin-bottom: 48px;
-  }
-
-  .quote-box {
-    max-width: 640px;
-    margin: 0 auto;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 36px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
-    transform-style: preserve-3d;
-  }
-
-  .quote-field { margin-bottom: 20px; }
-
-  .quote-field label {
-    display: block;
-    font-size: 0.8rem;
-    font-weight: 500;
-    color: var(--muted2);
-    margin-bottom: 8px;
-  }
-
-  .quote-field select,
-  .quote-field input,
-  .quote-field textarea {
-    width: 100%;
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 12px 14px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.9rem;
-    color: var(--text);
-    transition: border-color 0.2s;
-  }
-
-  .quote-field select:focus,
-  .quote-field input:focus,
-  .quote-field textarea:focus {
-    outline: none;
-    border-color: var(--accent);
-  }
-
-  .quote-field select:disabled { opacity: 0.5; cursor: not-allowed; }
-
-  .quote-field textarea { resize: vertical; min-height: 80px; }
-
-  .quote-grid-2 {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-  }
-
-  .quote-hint {
-    font-size: 0.75rem;
-    color: var(--muted);
-    margin-top: -12px;
-    margin-bottom: 20px;
-  }
-
-  #quote-submit { width: 100%; margin-top: 8px; }
-
-  .quote-result { text-align: center; }
-
-  .quote-result-label {
-    font-size: 0.75rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 10px;
-  }
-
-  .quote-result-amount {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: 2.2rem;
-    color: var(--accent);
-    margin-bottom: 14px;
-    line-height: 1.25;
-  }
-
-  .quote-result-note {
-    font-size: 0.85rem;
-    color: var(--muted2);
-    line-height: 1.6;
-    max-width: 460px;
-    margin: 0 auto 24px;
-  }
-
-  .quote-result-status {
-    font-size: 0.75rem;
-    color: var(--muted);
-    margin-bottom: 20px;
-  }
-
-  .quote-result-actions {
-    display: flex;
-    gap: 12px;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-
-  /* ── RESPONSIVE ── */
-  @media (max-width: 768px) {
-    nav ul { display: none; }
-    .how-grid { grid-template-columns: 1fr; gap: 48px; }
-    .services-grid { grid-template-columns: 1fr; }
-    .testimonial-grid { grid-template-columns: 1fr; }
-    .quote-box { padding: 24px; }
-    .quote-grid-2 { grid-template-columns: 1fr; gap: 0; }
-    footer { flex-direction: column; text-align: center; }
+  [data-reveal] { opacity: 0; transform: translateY(22px); }
+  .revealed { opacity: 1 !important; transform: translateY(0) !important; }
+  @media (prefers-reduced-motion: reduce) {
+    [data-reveal] { opacity: 1; transform: none; }
   }
 </style>
 </head>
 <body>
 
-<canvas id="fx-particles"></canvas>
-<div class="grid-bg"></div>
-<div id="fx-cursor-glow"></div>
-<div id="fx-cursor-dot"></div>
-<div id="fx-progress"></div>
-
 <!-- NAV -->
 <nav>
-  <div class="logo">AD<span>SIA</span></div>
-  <ul>
+  <a href="#" class="logo">AD<em>SIA</em></a>
+  <ul class="nav-links">
     <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#antes-despues">Antes / Después</a></li>
     <li><a href="#como-trabajamos">Cómo trabajamos</a></li>
-    <li><a href="#casos">Casos</a></li>
-    <li><a href="#presupuesto">Presupuesto</a></li>
     <li><a href="#faq">FAQ</a></li>
-    <li><a href="#contacto" class="nav-cta" data-magnetic="true">Diagnóstico gratis →</a></li>
   </ul>
+  <a href="#contacto" class="nav-cta">Diagnóstico gratis →</a>
 </nav>
 
 <!-- HERO -->
-<section class="hero">
-  <div class="hero-glow" id="fx-hero-glow"></div>
-  <div class="hero-blob-1"></div>
-  <div class="hero-blob-2"></div>
-
+<section class="hero" data-screen-label="Hero">
   <div class="hero-badge">
     <span class="dot"></span>
-    Agencia de IA para PyMEs — Uruguay y Argentina
+    Agencia de IA · Uruguay y Argentina
   </div>
 
-  <h1>
-    <span class="word" style="animation-delay:0.10s">IA</span>
-    <span class="word" style="animation-delay:0.18s">aplicada</span>
-    <span class="word" style="animation-delay:0.26s">a</span>
-    <span class="word" style="animation-delay:0.34s">tu</span>
-    <span class="word" style="animation-delay:0.42s">negocio,</span><br>
-    <span class="word highlight" style="animation-delay:0.52s">con resultados medibles.</span>
-  </h1>
+  <h1>IA aplicada a tu negocio,<br><span class="highlight">con resultados medibles.</span></h1>
 
   <p>
     No es un chatbot genérico. Es automatización real, integrada a las herramientas
@@ -1264,120 +921,110 @@
   </p>
 
   <div class="hero-actions">
-    <a href="#contacto" class="btn-primary" data-magnetic="true">
-      Quiero mi diagnóstico gratuito →
-    </a>
-    <a href="#servicios" class="btn-secondary" data-magnetic="true">
-      Ver los 3 servicios
-    </a>
+    <a href="#contacto" class="btn-primary">Pedir mi diagnóstico gratuito →</a>
+    <a href="#servicios" class="btn-secondary">Ver los 3 servicios</a>
   </div>
 
-  <div class="scroll-cue">
-    <span class="label">Scroll</span>
-    <span class="line"></span>
+  <div class="hero-trust">
+    <span><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4.5" stroke="#00E5FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>30 min por videollamada</span>
+    <span><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4.5" stroke="#00E5FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Propuesta en 48 hs</span>
+    <span><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4.5" stroke="#00E5FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Sin compromiso</span>
   </div>
 </section>
 
-<!-- DEMO SCREEN -->
-<div class="demo-wrapper">
-  <div class="demo-caption">Ejemplo real — Servicio 1: Meta Ads con capa de IA</div>
-  <div class="demo-screen" data-tilt="soft">
-    <div class="demo-topbar">
-      <div class="demo-dots">
-        <span></span><span></span><span></span>
+<!-- LA IA TRABAJANDO: LOS 3 SERVICIOS -->
+<div class="proof-wrapper" data-screen-label="La IA trabajando">
+  <div class="proof-caption">Así se ve en el día a día — ejemplos ilustrativos de los tres servicios</div>
+  <div class="proof-grid">
+
+    <div class="proof-card" data-reveal="0">
+      <div class="proof-tag">Meta Ads con IA</div>
+      <div class="proof-alert">
+        <span class="proof-dot"></span>
+        <div>
+          <strong>Campaña gastando más de lo que genera</strong>
+          <p>ROAS por debajo del punto de equilibrio desde hace 3 días.</p>
+        </div>
       </div>
-      <div class="demo-title">Claude × Meta Ads — cuenta de un cliente ADSIA</div>
-      <div class="demo-live"><span class="dot"></span>En vivo</div>
+      <div class="proof-chip">→ Pausar y reasignar presupuesto</div>
+      <div class="proof-note">Alertas cada mañana, antes de que el presupuesto se gaste. Vos decidís — nada se ejecuta sin tu confirmación.</div>
     </div>
-    <div class="demo-body" id="fx-chat-body">
 
-      <div class="chat-msg" data-chat-msg="user">
-        <div class="chat-avatar avatar-user">TU</div>
-        <div class="chat-bubble">
-          ¿Cuáles son mis campañas con peor ROAS esta semana?
-        </div>
+    <div class="proof-card" data-reveal="1">
+      <div class="proof-tag">Automatización con agentes</div>
+      <div class="proof-chat">
+        <div class="proof-bubble in"><span class="who">Cliente · 22:47</span>¿Hacen envíos al interior? ¿Cuánto demoran?</div>
+        <div class="proof-bubble out"><span class="who">Agente · 22:47</span>¡Sí! Llegan en 24–48 hs. ¿A qué ciudad sería? Te paso el costo exacto.</div>
       </div>
-
-      <div class="chat-msg" data-chat-msg="ai">
-        <div class="chat-avatar avatar-ai">AI</div>
-        <div class="chat-bubble ai">
-          Analizando tus <strong>4 campañas activas</strong>...<br><br>
-          🔴 <strong>Campaña "Verano 2025"</strong> — ROAS: 0.8x (gastás más de lo que generás)<br>
-          🟡 <strong>Campaña "Retargeting web"</strong> — ROAS: 1.4x (por debajo de tu meta de 2x)<br><br>
-          <span class="tag">Fatiga creativa detectada</span>
-          <span class="tag">CTR cayó 42%</span>
-          <span class="tag">Recomendar pausa</span>
-        </div>
-      </div>
-
-      <div class="chat-msg" data-chat-msg="user">
-        <div class="chat-avatar avatar-user">TU</div>
-        <div class="chat-bubble">
-          ¿Qué hago con "Verano 2025"? ¿La pauso?
-        </div>
-      </div>
-
-      <div class="chat-msg" data-chat-msg="ai">
-        <div class="chat-avatar avatar-ai">AI</div>
-        <div class="chat-bubble ai">
-          Sí, recomiendo <strong>pausarla hoy</strong>. En los últimos 7 días perdiste ~$180 USD en esa campaña. Tu audiencia ya la vio en promedio <strong>8.3 veces</strong> — está quemada.<br><br>
-          ✅ Propuesta: redirigir ese presupuesto a tu campaña "Catálogo primavera" que tiene ROAS 3.2x esta semana.
-        </div>
-      </div>
-
+      <div class="proof-note">Respondido al instante, fuera de horario, sin tu equipo. Lo complejo escala a una persona.</div>
     </div>
+
+    <div class="proof-card" data-reveal="2">
+      <div class="proof-tag">Consultoría IA</div>
+      <div class="proof-plan">
+        <div class="proof-plan-title">Plan priorizado — tu PyME</div>
+        <div class="proof-task done">Automatizar respuestas de WhatsApp<span class="prio">Mes 1</span></div>
+        <div class="proof-task">Seguimiento de presupuestos enviados<span class="prio">Mes 2</span></div>
+        <div class="proof-task">Reportes de ventas automáticos<span class="prio">Mes 3</span></div>
+      </div>
+      <div class="proof-note">Ordenado por impacto y esfuerzo — y lo implementamos con vos, paso a paso.</div>
+    </div>
+
   </div>
 </div>
 
-<!-- SERVICES -->
-<section class="services" id="servicios">
+<!-- SERVICIOS -->
+<section class="services" id="servicios" data-screen-label="Servicios">
   <div class="container">
     <div class="services-header">
       <div class="section-label" data-reveal="0">Qué hacemos</div>
       <h2 class="section-title" data-reveal="1">Tres formas de aplicar IA<br>a tu negocio</h2>
-      <p class="section-sub" data-reveal="2" style="margin:12px auto 0;text-align:center">
+      <p class="section-sub" data-reveal="2" style="margin: 10px auto 0;">
         Empezás por donde tenga más impacto para vos — con uno de los tres, o con los tres juntos.
       </p>
     </div>
 
     <div class="services-grid">
-      <div class="service-card" data-tilt="card" data-reveal="0">
-        <div class="service-num">Servicio 01</div>
-        <div class="service-icon">📊</div>
+      <div class="service-card" data-reveal="0">
+        <div class="service-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 17V9M8.5 17V3M14 17v-6M19 17H1" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+        </div>
         <h3>Meta Ads con capa de IA</h3>
         <p>Gestionamos tus campañas de Meta con un análisis de IA que corre sobre los datos reales de tu propia cuenta — no plantillas genéricas.</p>
         <ul class="service-items">
-          <li>Análisis de rendimiento (ROAS, CTR, CPA) en lenguaje simple</li>
-          <li>Detección de fatiga creativa y audiencias sobreexpuestas</li>
+          <li>Análisis de ROAS, CTR y CPA en lenguaje simple</li>
+          <li>Detección de fatiga creativa y audiencias quemadas</li>
           <li>Optimización continua de presupuesto</li>
-          <li>Gestión de audiencias y catálogo de productos</li>
+          <li>Gestión de audiencias y catálogo</li>
         </ul>
         <a href="#contacto" class="service-link">Diagnóstico para mis campañas →</a>
       </div>
 
-      <div class="service-card" data-tilt="card" data-reveal="1">
-        <div class="service-num">Servicio 02</div>
-        <div class="service-icon">🤖</div>
+      <div class="service-card" data-reveal="1">
+        <div class="service-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="6" width="14" height="11" rx="2.5" stroke="currentColor" stroke-width="1.7"/><path d="M10 6V2.5M7 11h.01M13 11h.01M7.5 14h5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+        </div>
         <h3>Automatización con agentes</h3>
-        <p>Agentes de IA que atienden clientes, hacen seguimiento de leads y se ocupan de tareas repetitivas — integrados a las herramientas que ya usás.</p>
+        <p>Agentes de IA que atienden clientes, siguen leads y se ocupan de tareas repetitivas — integrados a las herramientas que ya usás.</p>
         <ul class="service-items">
           <li>Atención al cliente por WhatsApp, 24/7</li>
           <li>Seguimiento automático de leads y agendamiento</li>
-          <li>Automatización de tareas administrativas repetitivas</li>
+          <li>Automatización de tareas administrativas</li>
           <li>Integración con tu CRM, planillas o sistema de gestión</li>
         </ul>
         <a href="#contacto" class="service-link">Diagnóstico para automatizar →</a>
       </div>
 
-      <div class="service-card" data-tilt="card" data-reveal="2">
-        <div class="service-num">Servicio 03</div>
-        <div class="service-icon">🧭</div>
+      <div class="service-card" data-reveal="2">
+        <div class="service-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7.5" stroke="currentColor" stroke-width="1.7"/><path d="M13 7l-1.8 4.2L7 13l1.8-4.2L13 7z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        </div>
         <h3>Consultoría IA para PyMEs</h3>
         <p>Un diagnóstico honesto de tus procesos y un plan concreto de dónde conviene aplicar IA primero, con acompañamiento en la puesta en marcha.</p>
         <ul class="service-items">
           <li>Diagnóstico de procesos y oportunidades de IA</li>
-          <li>Plan de implementación priorizado por impacto y esfuerzo</li>
-          <li>Capacitación al equipo para operar las herramientas</li>
+          <li>Plan priorizado por impacto y esfuerzo</li>
+          <li>Capacitación al equipo</li>
           <li>Acompañamiento continuo, no un informe y listo</li>
         </ul>
         <a href="#contacto" class="service-link">Diagnóstico de procesos →</a>
@@ -1386,8 +1033,59 @@
   </div>
 </section>
 
-<!-- HOW WE WORK -->
-<section class="how" id="como-trabajamos">
+<!-- ANTES / DESPUÉS -->
+<section class="compare" id="antes-despues" data-screen-label="Antes y después">
+  <div class="container">
+    <div class="compare-header">
+      <div class="section-label" data-reveal="0">Antes / Después</div>
+      <h2 class="section-title" data-reveal="1">Lo que cambia en el día a día</h2>
+      <p class="section-sub" data-reveal="2" style="margin: 10px auto 0;">
+        Situaciones típicas de una PyME — y cómo se ven después de aplicar cada servicio.
+      </p>
+    </div>
+
+    <div class="compare-list">
+      <div class="compare-row" data-reveal="0">
+        <div class="compare-cell compare-before">
+          <div class="tag-line">Antes</div>
+          <p>Te enterás tarde de que una campaña viene perdiendo plata. Pausás y ajustás a ojo, cuando el presupuesto ya se gastó.</p>
+        </div>
+        <div class="compare-cell compare-after">
+          <div class="tag-line">Después</div>
+          <p>La IA analiza tu cuenta todos los días, detecta fatiga y caídas de ROAS, y te dice qué pausar y a dónde mover el presupuesto.</p>
+          <div class="compare-service">Con <a href="#servicios">Meta Ads con capa de IA</a></div>
+        </div>
+      </div>
+
+      <div class="compare-row" data-reveal="1">
+        <div class="compare-cell compare-before">
+          <div class="tag-line">Antes</div>
+          <p>Respondés las mismas consultas por WhatsApp todo el día — también de noche y los fines de semana. Los leads que no contestás rápido, se enfrían.</p>
+        </div>
+        <div class="compare-cell compare-after">
+          <div class="tag-line">Después</div>
+          <p>Un agente responde 24/7, agenda solo y deriva a tu equipo únicamente lo que necesita una persona.</p>
+          <div class="compare-service">Con <a href="#servicios">Automatización con agentes</a></div>
+        </div>
+      </div>
+
+      <div class="compare-row" data-reveal="2">
+        <div class="compare-cell compare-before">
+          <div class="tag-line">Antes</div>
+          <p>Sabés que "hay que hacer algo con IA", pero entre herramientas, promesas y jerga técnica no está claro por dónde empezar.</p>
+        </div>
+        <div class="compare-cell compare-after">
+          <div class="tag-line">Después</div>
+          <p>Tenés un plan priorizado por impacto y esfuerzo, con alguien que lo implementa con vos — no un informe que queda en un cajón.</p>
+          <div class="compare-service">Con <a href="#servicios">Consultoría IA para PyMEs</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CÓMO TRABAJAMOS -->
+<section class="how" id="como-trabajamos" data-screen-label="Cómo trabajamos">
   <div class="container">
     <div class="how-grid">
       <div>
@@ -1395,59 +1093,45 @@
         <h2 class="section-title" data-reveal="1">Un proceso claro,<br>de punta a punta</h2>
         <p class="section-sub" data-reveal="2">Sin letra chica ni jerga técnica. Así se ve trabajar con ADSIA, elijas el servicio que elijas.</p>
 
-        <div class="steps" style="margin-top: 40px;">
-          <div class="step">
-            <div class="step-line">
-              <div class="step-num">1</div>
-              <div class="step-connector"></div>
-            </div>
+        <div class="steps">
+          <div class="step" data-reveal="0">
+            <div class="step-line"><div class="step-num">1</div><div class="step-connector"></div></div>
             <div class="step-content">
               <h3>Diagnóstico</h3>
-              <p>Revisamos tu negocio, tus campañas, tus procesos y las herramientas que ya usás para identificar dónde la IA genera impacto real. Sin costo, sin compromiso.</p>
+              <p>Revisamos tu negocio, tus campañas, tus procesos y las herramientas que ya usás. Sin costo, sin compromiso.</p>
             </div>
           </div>
-
-          <div class="step">
-            <div class="step-line">
-              <div class="step-num">2</div>
-              <div class="step-connector"></div>
-            </div>
+          <div class="step" data-reveal="1">
+            <div class="step-line"><div class="step-num">2</div><div class="step-connector"></div></div>
             <div class="step-content">
               <h3>Propuesta</h3>
-              <p>Te presentamos un plan concreto: qué servicio (o combinación) aplica a tu caso, qué resultados esperar y en cuánto tiempo.</p>
+              <p>Un plan concreto en 48 hs: qué servicio (o combinación) aplica a tu caso, qué resultados esperar y en cuánto tiempo.</p>
             </div>
           </div>
-
-          <div class="step">
-            <div class="step-line">
-              <div class="step-num">3</div>
-              <div class="step-connector"></div>
-            </div>
+          <div class="step" data-reveal="2">
+            <div class="step-line"><div class="step-num">3</div><div class="step-connector"></div></div>
             <div class="step-content">
               <h3>Implementación</h3>
-              <p>Configuramos, integramos y ponemos todo en marcha. Vos no tenés que aprender a programar ni tocar herramientas complejas.</p>
+              <p>Configuramos, integramos y ponemos todo en marcha. No tenés que aprender a programar ni tocar herramientas complejas.</p>
             </div>
           </div>
-
-          <div class="step">
-            <div class="step-line">
-              <div class="step-num">4</div>
-            </div>
+          <div class="step" data-reveal="3">
+            <div class="step-line"><div class="step-num">4</div></div>
             <div class="step-content">
               <h3>Optimización</h3>
-              <p>Medimos resultados y ajustamos de forma continua. No instalamos y desaparecemos — seguimos acompañando el resultado.</p>
+              <p>Medimos resultados y ajustamos de forma continua. No instalamos y desaparecemos.</p>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="how-visual" data-tilt="soft" data-reveal="2">
-        <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:0.9rem;margin-bottom:24px;color:var(--text)">
-          ¿Qué evaluamos en tu diagnóstico?
-        </div>
+      <div class="how-visual" data-reveal="2">
+        <div class="how-visual-title">¿Qué evaluamos en tu diagnóstico?</div>
 
         <div class="req-item">
-          <div class="req-icon blue">📊</div>
+          <div class="req-icon">
+            <svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M3 17V9M8.5 17V3M14 17v-6M19 17H1" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+          </div>
           <div class="req-text">
             <strong>Tus campañas y canales actuales</strong>
             Cómo estás generando y atendiendo demanda hoy
@@ -1455,7 +1139,9 @@
         </div>
 
         <div class="req-item">
-          <div class="req-icon purple">🔁</div>
+          <div class="req-icon">
+            <svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 8a6 6 0 0110.5-4M16 12a6 6 0 01-10.5 4M14.5 1v3h3M5.5 19v-3h-3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
           <div class="req-text">
             <strong>Procesos repetitivos</strong>
             Dónde tu equipo pierde horas en tareas que un agente podría hacer
@@ -1463,7 +1149,9 @@
         </div>
 
         <div class="req-item">
-          <div class="req-icon blue">🧩</div>
+          <div class="req-icon">
+            <svg width="16" height="16" viewBox="0 0 20 20" fill="none"><rect x="2" y="2" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.6"/><rect x="11" y="11" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.6"/><path d="M11 5.5h4M14 11V7.5M9 14.5H5M6 9v3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          </div>
           <div class="req-text">
             <strong>Tus herramientas actuales</strong>
             CRM, WhatsApp Business, planillas, sistemas de gestión
@@ -1471,179 +1159,27 @@
         </div>
 
         <div class="req-item">
-          <div class="req-icon green">🎯</div>
+          <div class="req-icon">
+            <svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7.5" stroke="currentColor" stroke-width="1.6"/><circle cx="10" cy="10" r="3.5" stroke="currentColor" stroke-width="1.6"/><circle cx="10" cy="10" r="0.8" fill="currentColor"/></svg>
+          </div>
           <div class="req-text">
             <strong>Oportunidades priorizadas</strong>
             Qué conviene implementar primero, según impacto y esfuerzo
           </div>
         </div>
 
-        <div style="margin-top:24px;padding:16px;background:rgba(0,229,255,0.05);border:1px solid rgba(0,229,255,0.15);border-radius:10px;">
-          <div style="font-size:0.75rem;color:var(--muted);margin-bottom:4px;">Tu diagnóstico con ADSIA</div>
-          <div style="font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:800;color:var(--accent)">Sin costo</div>
-          <div style="font-size:0.75rem;color:var(--muted);margin-top:4px;">30 minutos, por videollamada. Propuesta concreta en 48hs.</div>
+        <div class="diag-box">
+          <div class="k">Tu diagnóstico con ADSIA</div>
+          <div class="v">Sin costo</div>
+          <div class="k" style="margin-top:4px;">30 minutos por videollamada. Propuesta concreta en 48 hs. Si no hay un camino claro de impacto para tu negocio, te lo decimos y no seguimos.</div>
         </div>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- CASOS -->
-<section class="testimonials" id="casos">
-  <div class="container">
-    <div class="testimonials-header">
-      <div class="section-label" data-reveal="0">Casos de uso</div>
-      <h2 class="section-title" data-reveal="1">Así lo usan otros negocios</h2>
-    </div>
-    <div class="placeholder-note" data-reveal="2">
-      ⚠️ Casos ilustrativos — estamos reuniendo testimonios reales de nuestros primeros clientes. Se reemplazarán por historias verificadas apenas estén disponibles.
-    </div>
-
-    <div class="testimonial-grid">
-      <div class="testimonial-card" data-tilt="card" data-reveal="0">
-        <div class="testimonial-tag">Meta Ads con IA</div>
-        <div class="testimonial-metric">+<span data-count="35">35</span>% ROAS</div>
-        <p class="testimonial-quote">"En la primera semana detectamos dos campañas quemadas que veníamos pausando tarde a mano. Redirigir ese presupuesto solo ya justificó el servicio."</p>
-        <div class="testimonial-author">
-          <div class="testimonial-avatar">MG</div>
-          <div>
-            <strong>Nombre Apellido</strong>
-            <span>Ecommerce de indumentaria — Montevideo</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="testimonial-card" data-tilt="card" data-reveal="1">
-        <div class="testimonial-tag">Automatización</div>
-        <div class="testimonial-metric">-<span data-count="40">40</span>% tiempo de gestión</div>
-        <p class="testimonial-quote">"El agente de WhatsApp responde las consultas de siempre y agenda solo. Mi equipo ahora se dedica a lo que un mensaje automático no puede resolver."</p>
-        <div class="testimonial-author">
-          <div class="testimonial-avatar">RP</div>
-          <div>
-            <strong>Nombre Apellido</strong>
-            <span>Clínica estética — Buenos Aires</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="testimonial-card" data-tilt="card" data-reveal="2">
-        <div class="testimonial-tag">Consultoría IA</div>
-        <div class="testimonial-metric"><span data-count="3">3</span> procesos</div>
-        <p class="testimonial-quote">"El diagnóstico nos mostró exactamente por dónde empezar. Priorizamos 3 procesos y en un mes ya teníamos el primero funcionando."</p>
-        <div class="testimonial-author">
-          <div class="testimonial-avatar">SL</div>
-          <div>
-            <strong>Nombre Apellido</strong>
-            <span>Estudio inmobiliario — Punta del Este</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- QUOTE CALCULATOR -->
-<section class="quote" id="presupuesto">
-  <div class="container">
-    <div class="quote-header">
-      <div class="section-label" data-reveal="0">Presupuesto estimado</div>
-      <h2 class="section-title" data-reveal="1">Contanos tu caso,<br>mirá un rango al instante</h2>
-      <p class="section-sub" data-reveal="2" style="margin:12px auto 0;text-align:center">
-        Es un cálculo orientativo con reglas simples, no una cotización final. Lo revisamos a mano y
-        te confirmamos el número definitivo por WhatsApp o email.
-      </p>
-    </div>
-
-    <div class="quote-box" data-tilt="soft" data-reveal="2">
-      <form id="quote-form" action="https://formsubmit.co/hola@adsia.lat" method="POST">
-        <input type="hidden" name="_subject" value="Nueva solicitud de presupuesto — ADSIA">
-        <input type="hidden" name="_template" value="table">
-        <input type="hidden" name="_captcha" value="false">
-        <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
-        <input type="hidden" name="Estimado calculado" id="q-estimate-hidden">
-
-        <div class="quote-field">
-          <label for="q-service">¿Qué servicio te interesa?</label>
-          <select id="q-service" name="Servicio de interés" required>
-            <option value="" disabled selected>Elegí un servicio</option>
-          </select>
-        </div>
-
-        <div class="quote-field">
-          <label for="q-tier" id="q-tier-label">Elegí un servicio primero</label>
-          <select id="q-tier" name="Tramo" required disabled>
-            <option value="" disabled selected>—</option>
-          </select>
-        </div>
-
-        <div class="quote-grid-2">
-          <div class="quote-field">
-            <label for="q-name">Nombre</label>
-            <input type="text" id="q-name" name="Nombre" required>
-          </div>
-          <div class="quote-field">
-            <label for="q-business">Negocio</label>
-            <input type="text" id="q-business" name="Negocio">
-          </div>
-          <div class="quote-field">
-            <label for="q-email">Email</label>
-            <input type="email" id="q-email" name="Email" required>
-          </div>
-          <div class="quote-field">
-            <label for="q-phone">WhatsApp</label>
-            <input type="tel" id="q-phone" name="WhatsApp" placeholder="+598...">
-          </div>
-        </div>
-
-        <div class="quote-field">
-          <label for="q-notes">Contanos algo más de tu caso (opcional)</label>
-          <textarea id="q-notes" name="Comentario" rows="3"></textarea>
-        </div>
-
-        <button type="submit" class="btn-primary" id="quote-submit" data-magnetic="true">Ver mi presupuesto estimado →</button>
-      </form>
-
-      <div class="quote-result" id="quote-result" hidden>
-        <div class="quote-result-label">Tu presupuesto estimado</div>
-        <div class="quote-result-amount" id="quote-result-amount">—</div>
-        <p class="quote-result-note" id="quote-result-note"></p>
-        <p class="quote-result-status" id="quote-result-status">Enviando tu información a nuestro equipo...</p>
-        <div class="quote-result-actions">
-          <a href="#" id="quote-whatsapp-link" class="btn-secondary" target="_blank">📱 Confirmar también por WhatsApp</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- DIAGNÓSTICO -->
-<section class="pricing" id="diagnostico">
-  <div class="container">
-    <div class="pricing-header">
-      <div class="section-label" data-reveal="0">Cómo se cotiza</div>
-      <h2 class="section-title" data-reveal="1">Sin paquetes cerrados.<br>Empezás por un diagnóstico.</h2>
-      <p class="section-sub" data-reveal="2" style="margin:12px auto 0;text-align:center">
-        Cada PyME tiene procesos, herramientas y presupuesto distintos. Por eso no vendemos planes genéricos:
-        primero hacemos el diagnóstico gratuito y después te proponemos exactamente lo que necesitás — un servicio, o los tres.
-      </p>
-    </div>
-
-    <div class="guarantee-banner" data-reveal="2">
-      <div class="guarantee-icon">🛡️</div>
-      <div class="guarantee-text">
-        <strong>Sin compromiso</strong>
-        <p>Si después del diagnóstico no hay un camino claro de impacto para tu negocio, te lo decimos y no seguimos. El diagnóstico no tiene costo ni te obliga a nada.</p>
-      </div>
-    </div>
-
-    <div style="text-align:center;margin-top:40px" data-reveal="3">
-      <a href="#contacto" class="btn-primary" data-magnetic="true">Quiero mi diagnóstico gratuito →</a>
     </div>
   </div>
 </section>
 
 <!-- FAQ -->
-<section class="faq" id="faq">
+<section class="faq" id="faq" data-screen-label="FAQ">
   <div class="container">
     <div class="faq-header">
       <div class="section-label" data-reveal="0">Preguntas frecuentes</div>
@@ -1651,100 +1187,106 @@
     </div>
 
     <div class="faq-list">
-
       <div class="faq-item" data-reveal="0">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          ¿Necesito saber de tecnología para trabajar con ustedes?
-          <span class="arrow">▾</span>
-        </div>
+        <button class="faq-q" onclick="toggleFaq(this)">¿Cuánto cuesta?<span class="arrow">▾</span></button>
+        <div class="faq-a">Depende del servicio y del alcance que definamos en el diagnóstico gratuito — no hay un precio único porque cada PyME parte de una situación distinta. Después del diagnóstico te presentamos una propuesta clara, sin costos ocultos y sin compromiso.</div>
+      </div>
+      <div class="faq-item" data-reveal="1">
+        <button class="faq-q" onclick="toggleFaq(this)">¿Necesito saber de tecnología para trabajar con ustedes?<span class="arrow">▾</span></button>
         <div class="faq-a">No. Diseñamos todo para que cualquier dueño de PyME pueda entender y decidir sin conocimientos técnicos. ADSIA se ocupa de toda la configuración e integración — vos seguís enfocado en tu negocio.</div>
       </div>
-
-      <div class="faq-item" data-reveal="1">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          ¿Es seguro conectar mis cuentas y herramientas?
-          <span class="arrow">▾</span>
-        </div>
+      <div class="faq-item" data-reveal="2">
+        <button class="faq-q" onclick="toggleFaq(this)">¿Es seguro conectar mis cuentas y herramientas?<span class="arrow">▾</span></button>
         <div class="faq-a">Sí. Trabajamos con conectores e integraciones oficiales de cada plataforma (Meta, WhatsApp Business, tu CRM, etc.). No pedimos contraseñas ni credenciales por fuera de esos canales oficiales.</div>
       </div>
-
-      <div class="faq-item" data-reveal="2">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          ¿Qué pasa si la IA comete un error?
-          <span class="arrow">▾</span>
-        </div>
-        <div class="faq-a">Depende del servicio, pero por defecto la IA recomienda y vos decidís: no ejecuta cambios en tus campañas ni en tus sistemas sin tu confirmación. Para agentes de atención definimos juntos qué puede resolver solo y qué escala a una persona.</div>
-      </div>
-
       <div class="faq-item" data-reveal="3">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          ¿Cuánto cuesta?
-          <span class="arrow">▾</span>
-        </div>
-        <div class="faq-a">Depende del servicio y del alcance que definamos en el diagnóstico gratuito — no hay un precio único porque cada PyME parte de una situación distinta. Después del diagnóstico te presentamos una propuesta clara, sin costos ocultos.</div>
+        <button class="faq-q" onclick="toggleFaq(this)">¿Qué pasa si la IA comete un error?<span class="arrow">▾</span></button>
+        <div class="faq-a">Por defecto la IA recomienda y vos decidís: no ejecuta cambios en tus campañas ni en tus sistemas sin tu confirmación. Para agentes de atención definimos juntos qué puede resolver solo y qué escala a una persona.</div>
       </div>
-
       <div class="faq-item" data-reveal="4">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          ¿Puedo contratar solo uno de los tres servicios?
-          <span class="arrow">▾</span>
-        </div>
+        <button class="faq-q" onclick="toggleFaq(this)">¿Puedo contratar solo uno de los tres servicios?<span class="arrow">▾</span></button>
         <div class="faq-a">Sí. Los tres servicios son independientes. Muchos clientes empiezan por uno solo — típicamente Meta Ads o automatización — y suman los otros más adelante si tiene sentido para su negocio.</div>
       </div>
-
       <div class="faq-item" data-reveal="5">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          ¿Funciona con negocios de Argentina?
-          <span class="arrow">▾</span>
-        </div>
+        <button class="faq-q" onclick="toggleFaq(this)">¿Funciona con negocios de Argentina?<span class="arrow">▾</span></button>
         <div class="faq-a">Sí. Trabajamos con cuentas y negocios de toda la región. Operamos en Uruguay y Argentina, con soporte en español rioplatense y conocimiento del contexto local.</div>
       </div>
-
       <div class="faq-item" data-reveal="6">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          ¿Cuánto tarda el diagnóstico y cuándo empiezo a ver resultados?
-          <span class="arrow">▾</span>
-        </div>
-        <div class="faq-a">El diagnóstico es una videollamada de 30 minutos, y recibís la propuesta en 48hs. Los tiempos de implementación varían según el servicio: la conexión de Meta Ads suele estar operativa en un día; un agente de atención o un plan de consultoría toma un poco más, según el alcance acordado.</div>
+        <button class="faq-q" onclick="toggleFaq(this)">¿Cuánto tarda el diagnóstico y cuándo veo resultados?<span class="arrow">▾</span></button>
+        <div class="faq-a">El diagnóstico es una videollamada de 30 minutos, y recibís la propuesta en 48 hs. Los tiempos de implementación varían según el servicio: la conexión de Meta Ads suele estar operativa en un día; un agente de atención o un plan de consultoría toma un poco más, según el alcance acordado.</div>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- CTA FINAL -->
-<section class="cta-final" id="contacto">
-  <div class="cta-glow"></div>
-  <div class="container" style="position:relative">
-    <div class="section-label" data-reveal="0" style="text-align:center">Empezá hoy</div>
-    <h2 data-reveal="1">¿Listo para aplicar<br><span style="background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">IA a tu negocio?</span></h2>
-    <p data-reveal="2">Agendá un diagnóstico gratuito de 30 minutos. Te mostramos por dónde<br>empezar antes de que pagues nada.</p>
-
-    <div data-reveal="3" style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
-      <a href="https://wa.me/59892290002?text=Hola!%20Quiero%20mi%20diagn%C3%B3stico%20gratuito%20de%20ADSIA" class="btn-primary" target="_blank" data-magnetic="true">
-        📱 WhatsApp directo →
-      </a>
-      <a href="mailto:hola@adsia.lat" class="btn-secondary" data-magnetic="true">
-        ✉️ Escribir por email
-      </a>
+<!-- CONTACTO -->
+<section class="contact" id="contacto" data-screen-label="Contacto">
+  <div class="container">
+    <div class="contact-header">
+      <div class="section-label" data-reveal="0">Empezá hoy</div>
+      <h2 class="section-title" data-reveal="1">Pedí tu diagnóstico gratuito</h2>
+      <p class="section-sub" data-reveal="2" style="margin: 10px auto 0;">
+        Contanos de tu negocio y coordinamos una videollamada de 30 minutos.
+        Te mostramos por dónde empezar antes de que pagues nada.
+      </p>
     </div>
 
-    <div style="margin-top:48px;display:flex;gap:40px;justify-content:center;flex-wrap:wrap;">
-      <div data-reveal="0" style="text-align:center">
-        <div style="font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--accent)"><span data-count="3">3</span></div>
-        <div style="font-size:0.75rem;color:var(--muted);margin-top:2px">Líneas de servicio de IA</div>
+    <div class="contact-box" data-reveal="2">
+      <form id="contact-form" action="https://formsubmit.co/hola@adsia.lat" method="POST">
+        <input type="hidden" name="_subject" value="Nueva solicitud de diagnóstico — ADSIA">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+
+        <div class="field-grid">
+          <div class="field">
+            <label for="c-name">Nombre</label>
+            <input type="text" id="c-name" name="Nombre" required autocomplete="name">
+          </div>
+          <div class="field">
+            <label for="c-business">Negocio</label>
+            <input type="text" id="c-business" name="Negocio" autocomplete="organization">
+          </div>
+          <div class="field">
+            <label for="c-phone">WhatsApp</label>
+            <input type="tel" id="c-phone" name="WhatsApp" placeholder="+598..." required autocomplete="tel">
+          </div>
+          <div class="field">
+            <label for="c-email">Email</label>
+            <input type="email" id="c-email" name="Email" autocomplete="email">
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="c-interest">¿Qué te interesa?</label>
+          <select id="c-interest" name="Interés" required>
+            <option value="" disabled selected>Elegí una opción</option>
+            <option>Meta Ads con capa de IA</option>
+            <option>Automatización con agentes</option>
+            <option>Consultoría IA</option>
+            <option>No sé todavía — quiero el diagnóstico</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="c-notes">Contanos algo más de tu caso (opcional)</label>
+          <textarea id="c-notes" name="Comentario" rows="3"></textarea>
+        </div>
+
+        <button type="submit" class="btn-primary" id="contact-submit">Pedir mi diagnóstico gratuito →</button>
+      </form>
+
+      <div class="contact-result" id="contact-result" hidden>
+        <div class="icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 12.5L9.5 18L20 6.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Listo — recibimos tu solicitud</h3>
+        <p id="contact-result-note">Te contactamos dentro de las próximas 24 hs hábiles para coordinar la videollamada.</p>
+        <a href="#" id="contact-whatsapp-link" class="btn-secondary" target="_blank" rel="noopener">Adelantar por WhatsApp →</a>
       </div>
-      <div data-reveal="1" style="text-align:center">
-        <div style="font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--text)">Sin costo</div>
-        <div style="font-size:0.75rem;color:var(--muted);margin-top:2px">El diagnóstico inicial</div>
-      </div>
-      <div data-reveal="2" style="text-align:center">
-        <div style="font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--text)">0</div>
-        <div style="font-size:0.75rem;color:var(--muted);margin-top:2px">Conocimientos técnicos necesarios</div>
-      </div>
-      <div data-reveal="3" style="text-align:center">
-        <div style="font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--accent2)">UY <span style="color:var(--text)">/</span> AR</div>
-        <div style="font-size:0.75rem;color:var(--muted);margin-top:2px">Operamos en toda la región</div>
+
+      <div class="contact-alt" id="contact-alt">
+        ¿Preferís hablar directo? <a href="https://wa.me/59892290002?text=Hola!%20Quiero%20mi%20diagn%C3%B3stico%20gratuito%20de%20ADSIA" target="_blank" rel="noopener">Escribinos por WhatsApp</a>
       </div>
     </div>
   </div>
@@ -1752,14 +1294,19 @@
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-logo">ADSIA</div>
-  <div class="footer-copy">© 2026 ADSIA — Uruguay & Argentina</div>
+  <div class="footer-logo">AD<em>SIA</em></div>
+  <div class="footer-copy">© 2026 ADSIA — Uruguay & Argentina · <a href="mailto:hola@adsia.lat">hola@adsia.lat</a></div>
   <div class="footer-links">
     <a href="#servicios">Servicios</a>
-    <a href="#presupuesto">Presupuesto</a>
+    <a href="#como-trabajamos">Cómo trabajamos</a>
     <a href="#contacto">Contacto</a>
   </div>
 </footer>
+
+<!-- STICKY CTA (solo mobile) -->
+<div class="sticky-cta" id="sticky-cta">
+  <a href="#contacto">Pedir mi diagnóstico gratuito →</a>
+</div>
 
 <script>
 function toggleFaq(el) {
@@ -1769,381 +1316,59 @@ function toggleFaq(el) {
   if (!isOpen) item.classList.add('open');
 }
 
-function reducedMotion() {
-  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-}
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-// ── Particle field ──
-function initParticles() {
-  const canvas = document.getElementById('fx-particles');
-  if (!canvas || reducedMotion()) return;
-  const ctx = canvas.getContext('2d');
-  const DENSITY = 80;
-  let w, h, dpr;
-  function resize() {
-    dpr = Math.min(window.devicePixelRatio || 1, 2);
-    w = canvas.clientWidth; h = canvas.clientHeight;
-    canvas.width = w * dpr; canvas.height = h * dpr;
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+// ── Scroll reveals ──
+(function () {
+  const els = document.querySelectorAll('[data-reveal]');
+  if (!els.length) return;
+  if (reducedMotion || !('IntersectionObserver' in window)) {
+    els.forEach(el => el.classList.add('revealed'));
+    return;
   }
-  resize();
-  window.addEventListener('resize', resize);
-
-  const colors = ['0,229,255', '123,97,255', '255,77,109'];
-  const pts = [];
-  const count = Math.round(DENSITY * Math.min(1, (window.innerWidth || 1200) / 1200));
-  for (let i = 0; i < count; i++) {
-    pts.push({
-      x: Math.random() * w, y: Math.random() * h,
-      vx: (Math.random() - 0.5) * 0.25, vy: (Math.random() - 0.5) * 0.25,
-      r: Math.random() * 1.6 + 0.4,
-      c: colors[i % 3 === 0 ? 1 : (i % 7 === 0 ? 2 : 0)],
-      a: Math.random() * 0.35 + 0.1
-    });
-  }
-  let mouse = { x: -9999, y: -9999 };
-  window.addEventListener('mousemove', e => { mouse = { x: e.clientX, y: e.clientY }; });
-
-  function tick() {
-    ctx.clearRect(0, 0, w, h);
-    for (const p of pts) {
-      const dx = p.x - mouse.x, dy = p.y - mouse.y;
-      const d2 = dx * dx + dy * dy;
-      if (d2 < 14400 && d2 > 0.01) {
-        const d = Math.sqrt(d2);
-        p.x += (dx / d) * 0.6; p.y += (dy / d) * 0.6;
-      }
-      p.x += p.vx; p.y += p.vy;
-      if (p.x < -10) p.x = w + 10; if (p.x > w + 10) p.x = -10;
-      if (p.y < -10) p.y = h + 10; if (p.y > h + 10) p.y = -10;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(' + p.c + ',' + p.a + ')';
-      ctx.fill();
-    }
-    for (let i = 0; i < pts.length; i++) {
-      for (let j = i + 1; j < pts.length; j++) {
-        const dx = pts[i].x - pts[j].x, dy = pts[i].y - pts[j].y;
-        const d2 = dx * dx + dy * dy;
-        if (d2 < 12100) {
-          const o = (1 - d2 / 12100) * 0.10;
-          ctx.beginPath();
-          ctx.moveTo(pts[i].x, pts[i].y);
-          ctx.lineTo(pts[j].x, pts[j].y);
-          ctx.strokeStyle = 'rgba(0,229,255,' + o.toFixed(3) + ')';
-          ctx.lineWidth = 0.6;
-          ctx.stroke();
-        }
-      }
-    }
-    requestAnimationFrame(tick);
-  }
-  requestAnimationFrame(tick);
-}
-
-// ── Cursor glow + dot ──
-function initCursor() {
-  if (!window.matchMedia('(pointer: fine)').matches || reducedMotion()) return;
-  const glow = document.getElementById('fx-cursor-glow');
-  const dot = document.getElementById('fx-cursor-dot');
-  if (!glow || !dot) return;
-  let tx = -9999, ty = -9999, gx = tx, gy = ty, shown = false;
-  window.addEventListener('mousemove', e => {
-    tx = e.clientX; ty = e.clientY;
-    if (!shown) { shown = true; glow.style.opacity = '1'; dot.style.opacity = '1'; }
-    dot.style.left = tx + 'px'; dot.style.top = ty + 'px';
-  });
-  document.documentElement.addEventListener('mouseleave', () => {
-    shown = false; glow.style.opacity = '0'; dot.style.opacity = '0';
-  });
-  function follow() {
-    gx += (tx - gx) * 0.07; gy += (ty - gy) * 0.07;
-    glow.style.left = gx + 'px'; glow.style.top = gy + 'px';
-    requestAnimationFrame(follow);
-  }
-  requestAnimationFrame(follow);
-}
-
-// ── Scroll progress bar ──
-function initProgress() {
-  const bar = document.getElementById('fx-progress');
-  if (!bar) return;
-  function upd() {
-    const max = document.documentElement.scrollHeight - window.innerHeight;
-    bar.style.width = (max > 0 ? (window.scrollY / max) * 100 : 0) + '%';
-  }
-  window.addEventListener('scroll', upd, { passive: true });
-  upd();
-}
-
-// ── Scroll reveals (staggered) ──
-function initReveals() {
-  const els = Array.from(document.querySelectorAll('[data-reveal]'));
-  if (!els.length || reducedMotion()) return;
-  els.forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(26px)';
-  });
   const io = new IntersectionObserver(entries => {
     entries.forEach(en => {
       if (!en.isIntersecting) return;
       const el = en.target;
       const idx = parseInt(el.getAttribute('data-reveal') || '0', 10);
-      el.style.transition = 'opacity 0.7s cubic-bezier(0.2,0.7,0.2,1), transform 0.7s cubic-bezier(0.2,0.7,0.2,1)';
-      el.style.transitionDelay = (idx * 0.09) + 's';
-      el.style.opacity = '1';
-      el.style.transform = 'translateY(0)';
+      el.style.transition = 'opacity 0.6s cubic-bezier(0.2,0.7,0.2,1) ' + (idx * 0.08) + 's, transform 0.6s cubic-bezier(0.2,0.7,0.2,1) ' + (idx * 0.08) + 's';
+      el.classList.add('revealed');
       io.unobserve(el);
     });
   }, { threshold: 0.12 });
   els.forEach(el => io.observe(el));
-}
+})();
 
-// ── 3D tilt ──
-function initTilt() {
-  if (!window.matchMedia('(pointer: fine)').matches || reducedMotion()) return;
-  document.querySelectorAll('[data-tilt]').forEach(el => {
-    const soft = el.getAttribute('data-tilt') === 'soft';
-    const max = soft ? 3 : 6;
-    el.addEventListener('mousemove', e => {
-      const r = el.getBoundingClientRect();
-      const px = (e.clientX - r.left) / r.width - 0.5;
-      const py = (e.clientY - r.top) / r.height - 0.5;
-      el.style.transform = 'perspective(900px) rotateX(' + (-py * max).toFixed(2) + 'deg) rotateY(' + (px * max).toFixed(2) + 'deg) translateY(-3px)';
-    });
-    el.addEventListener('mouseleave', () => {
-      el.style.transition = 'transform 0.5s cubic-bezier(0.2,0.7,0.2,1)';
-      el.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg) translateY(0)';
-      setTimeout(() => { el.style.transition = ''; }, 500);
-    });
-  });
-}
-
-// ── Magnetic buttons ──
-function initMagnetic() {
-  if (!window.matchMedia('(pointer: fine)').matches || reducedMotion()) return;
-  document.querySelectorAll('[data-magnetic]').forEach(el => {
-    el.addEventListener('mousemove', e => {
-      const r = el.getBoundingClientRect();
-      const dx = e.clientX - (r.left + r.width / 2);
-      const dy = e.clientY - (r.top + r.height / 2);
-      el.style.transform = 'translate(' + (dx * 0.15).toFixed(1) + 'px,' + (dy * 0.25).toFixed(1) + 'px)';
-    });
-    el.addEventListener('mouseleave', () => {
-      el.style.transition = 'transform 0.4s cubic-bezier(0.2,0.7,0.2,1)';
-      el.style.transform = 'translate(0,0)';
-      setTimeout(() => { el.style.transition = ''; }, 400);
-    });
-  });
-}
-
-// ── Chat demo: sequential reveal with typing indicator ──
-function initChat() {
-  const body = document.getElementById('fx-chat-body');
-  if (!body) return;
-  const msgs = Array.from(body.querySelectorAll('[data-chat-msg]'));
-  if (!msgs.length || reducedMotion()) return;
-  msgs.forEach(m => {
-    m.style.opacity = '0';
-    m.style.transform = 'translateY(10px)';
-    m.style.transition = 'opacity 0.45s ease, transform 0.45s ease';
-  });
-  const typing = document.createElement('div');
-  typing.className = 'chat-typing';
-  typing.innerHTML =
-    '<div class="chat-avatar avatar-ai">AI</div>' +
-    '<div class="bubble"><span></span><span></span><span></span></div>';
-  body.appendChild(typing);
-
-  let started = false;
-  const timers = [];
-
-  function play() {
-    let t = 400;
-    msgs.forEach(m => {
-      const isAi = m.getAttribute('data-chat-msg') === 'ai';
-      if (isAi) {
-        const showTyping = t;
-        timers.push(setTimeout(() => {
-          typing.style.display = 'flex';
-          m.parentNode.insertBefore(typing, m);
-        }, showTyping));
-        t += 1300;
-      }
-      timers.push(setTimeout(() => {
-        typing.style.display = 'none';
-        m.style.opacity = '1';
-        m.style.transform = 'translateY(0)';
-      }, t));
-      t += isAi ? 900 : 1100;
-    });
-  }
-
+// ── Sticky CTA: ocultar cuando el form está en pantalla ──
+(function () {
+  const bar = document.getElementById('sticky-cta');
+  const target = document.getElementById('contacto');
+  if (!bar || !target || !('IntersectionObserver' in window)) return;
   const io = new IntersectionObserver(entries => {
-    entries.forEach(en => {
-      if (en.isIntersecting && !started) { started = true; play(); io.disconnect(); }
-    });
-  }, { threshold: 0.35 });
-  io.observe(body);
-}
+    entries.forEach(en => bar.classList.toggle('hidden', en.isIntersecting));
+  }, { threshold: 0.15 });
+  io.observe(target);
+})();
 
-// ── Count-up numbers ──
-function initCounts() {
-  const els = Array.from(document.querySelectorAll('[data-count]'));
-  if (!els.length || reducedMotion()) return;
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(en => {
-      if (!en.isIntersecting) return;
-      const el = en.target;
-      io.unobserve(el);
-      const target = parseInt(el.getAttribute('data-count'), 10) || 0;
-      const dur = 1200;
-      const t0 = performance.now();
-      function step(now) {
-        const p = Math.min(1, (now - t0) / dur);
-        const eased = 1 - Math.pow(1 - p, 3);
-        el.textContent = String(Math.round(target * eased));
-        if (p < 1) requestAnimationFrame(step);
-      }
-      requestAnimationFrame(step);
-    });
-  }, { threshold: 0.6 });
-  els.forEach(el => io.observe(el));
-}
-
-// ── Parallax hero glow ──
-function initParallax() {
-  if (reducedMotion()) return;
-  const glow = document.getElementById('fx-hero-glow');
-  if (!glow) return;
-  function upd() {
-    glow.style.marginTop = (window.scrollY * 0.18) + 'px';
-  }
-  window.addEventListener('scroll', upd, { passive: true });
-}
-
-// ── Presupuesto estimado: config de precios ──
-// EDITAR ACÁ los números — son valores de referencia, hay que confirmarlos
-// con los precios reales de cada servicio antes de tomarlos como definitivos.
-const PRICING = {
-  meta: {
-    label: 'Meta Ads con capa de IA',
-    variableLabel: '¿Cuánto gastás hoy por mes en pauta de Meta Ads?',
-    tiers: [
-      { value: 'lt500', label: 'Menos de $500 USD/mes', low: 99, high: 149 },
-      { value: '500to2000', label: 'Entre $500 y $2.000 USD/mes', low: 149, high: 249 },
-      { value: 'gt2000', label: 'Más de $2.000 USD/mes', low: 249, high: 399 }
-    ]
-  },
-  automation: {
-    label: 'Automatización con agentes',
-    variableLabel: '¿Cuántos procesos o canales querés automatizar?',
-    tiers: [
-      { value: '1', label: '1 proceso (ej. solo WhatsApp)', setupLow: 249, setupHigh: 349, monthlyLow: 149, monthlyHigh: 199 },
-      { value: '2-3', label: '2 a 3 procesos', setupLow: 349, setupHigh: 599, monthlyLow: 199, monthlyHigh: 299 },
-      { value: '4plus', label: '4 o más procesos', custom: true }
-    ]
-  },
-  consulting: {
-    label: 'Consultoría IA para PyMEs',
-    variableLabel: '¿Cuántos empleados tiene tu empresa?',
-    tiers: [
-      { value: '1-10', label: '1 a 10 empleados', low: 299, high: 499 },
-      { value: '11-50', label: '11 a 50 empleados', low: 599, high: 999 },
-      { value: '50plus', label: 'Más de 50 empleados', custom: true }
-    ]
-  }
-};
-
-function formatEstimate(serviceKey, tierValue) {
-  const service = PRICING[serviceKey];
-  const tier = service.tiers.find(t => t.value === tierValue);
-  if (!service || !tier) return null;
-
-  if (tier.custom) {
-    return {
-      amount: 'A cotizar',
-      note: 'Tu caso tiene una escala particular — preferimos armarte una propuesta a medida en vez de mostrarte un número que no aplicaría. Nuestro equipo te contacta directo.'
-    };
-  }
-
-  if (serviceKey === 'automation') {
-    return {
-      amount: `$${tier.setupLow}–$${tier.setupHigh} setup + $${tier.monthlyLow}–$${tier.monthlyHigh} USD/mes`,
-      note: 'Incluye configuración inicial del agente y honorario mensual de mantenimiento. Rango orientativo — te confirmamos el número exacto según el alcance real.'
-    };
-  }
-
-  if (serviceKey === 'consulting') {
-    return {
-      amount: `$${tier.low}–$${tier.high} USD (pago único)`,
-      note: 'Incluye diagnóstico completo y plan de implementación priorizado. Rango orientativo — te confirmamos el número exacto según el alcance real.'
-    };
-  }
-
-  return {
-    amount: `$${tier.low}–$${tier.high} USD/mes`,
-    note: 'Honorario de gestión mensual, además de tu presupuesto de pauta en Meta. Rango orientativo — te confirmamos el número exacto según el alcance real.'
-  };
-}
-
-// ── Presupuesto estimado: wiring del formulario ──
-function initQuote() {
-  const form = document.getElementById('quote-form');
+// ── Form de diagnóstico ──
+(function () {
+  const form = document.getElementById('contact-form');
   if (!form) return;
-
-  const serviceSelect = document.getElementById('q-service');
-  const tierSelect = document.getElementById('q-tier');
-  const tierLabel = document.getElementById('q-tier-label');
-  const estimateHidden = document.getElementById('q-estimate-hidden');
-  const result = document.getElementById('quote-result');
-  const resultAmount = document.getElementById('quote-result-amount');
-  const resultNote = document.getElementById('quote-result-note');
-  const resultStatus = document.getElementById('quote-result-status');
-  const whatsappLink = document.getElementById('quote-whatsapp-link');
-
-  Object.keys(PRICING).forEach(key => {
-    const opt = document.createElement('option');
-    opt.value = key;
-    opt.textContent = PRICING[key].label;
-    serviceSelect.appendChild(opt);
-  });
-
-  serviceSelect.addEventListener('change', () => {
-    const service = PRICING[serviceSelect.value];
-    tierSelect.innerHTML = '<option value="" disabled selected>Elegí una opción</option>';
-    if (!service) {
-      tierSelect.disabled = true;
-      tierLabel.textContent = 'Elegí un servicio primero';
-      return;
-    }
-    tierLabel.textContent = service.variableLabel;
-    service.tiers.forEach(tier => {
-      const opt = document.createElement('option');
-      opt.value = tier.value;
-      opt.textContent = tier.label;
-      tierSelect.appendChild(opt);
-    });
-    tierSelect.disabled = false;
-  });
+  const result = document.getElementById('contact-result');
+  const resultNote = document.getElementById('contact-result-note');
+  const alt = document.getElementById('contact-alt');
+  const waLink = document.getElementById('contact-whatsapp-link');
+  const submitBtn = document.getElementById('contact-submit');
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const estimate = formatEstimate(serviceSelect.value, tierSelect.value);
-    if (!estimate) return;
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Enviando...';
 
-    estimateHidden.value = estimate.amount;
-    resultAmount.textContent = estimate.amount;
-    resultNote.textContent = estimate.note;
-    resultStatus.textContent = 'Enviando tu información a nuestro equipo...';
-
-    const name = document.getElementById('q-name').value;
-    const service = PRICING[serviceSelect.value];
-    const waText = `Hola! Soy ${name}. Completé el formulario de presupuesto de ADSIA para ${service.label} y mi estimado fue: ${estimate.amount}. ¿Podemos confirmar los detalles?`;
-    whatsappLink.href = `https://wa.me/59892290002?text=${encodeURIComponent(waText)}`;
-
-    form.hidden = true;
-    result.hidden = false;
+    const name = document.getElementById('c-name').value;
+    const interest = document.getElementById('c-interest').value;
+    const waText = 'Hola! Soy ' + name + '. Acabo de pedir mi diagnóstico gratuito de ADSIA (interés: ' + interest + '). ¿Coordinamos?';
+    waLink.href = 'https://wa.me/59892290002?text=' + encodeURIComponent(waText);
 
     try {
       const res = await fetch('https://formsubmit.co/ajax/hola@adsia.lat', {
@@ -2151,28 +1376,18 @@ function initQuote() {
         headers: { 'Accept': 'application/json' },
         body: new FormData(form)
       });
-      resultStatus.textContent = res.ok
-        ? 'Listo — recibimos tu información. Te confirmamos el número definitivo pronto.'
-        : 'Guardamos tu estimado. Si no tenés novedades en 48hs, escribinos por WhatsApp para asegurarnos de que llegó.';
+      resultNote.textContent = res.ok
+        ? 'Te contactamos dentro de las próximas 24 hs hábiles para coordinar la videollamada.'
+        : 'Si no tenés novedades en 24 hs, escribinos por WhatsApp para asegurarnos de que llegó.';
     } catch (err) {
-      console.warn(err);
-      resultStatus.textContent = 'Guardamos tu estimado. Si no tenés novedades en 48hs, escribinos por WhatsApp para asegurarnos de que llegó.';
+      resultNote.textContent = 'Si no tenés novedades en 24 hs, escribinos por WhatsApp para asegurarnos de que llegó.';
     }
-  });
-}
 
-setTimeout(() => {
-  try { initParticles(); } catch (e) { console.warn(e); }
-  try { initCursor(); } catch (e) { console.warn(e); }
-  try { initProgress(); } catch (e) { console.warn(e); }
-  try { initReveals(); } catch (e) { console.warn(e); }
-  try { initTilt(); } catch (e) { console.warn(e); }
-  try { initMagnetic(); } catch (e) { console.warn(e); }
-  try { initChat(); } catch (e) { console.warn(e); }
-  try { initCounts(); } catch (e) { console.warn(e); }
-  try { initParallax(); } catch (e) { console.warn(e); }
-  try { initQuote(); } catch (e) { console.warn(e); }
-}, 60);
+    form.hidden = true;
+    alt.hidden = true;
+    result.hidden = false;
+  });
+})();
 </script>
 </body>
 </html>
