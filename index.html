@@ -4,7 +4,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ADSIA — Manejá tus Meta Ads con IA</title>
+<title>ADSIA — Agencia de IA para PyMEs uruguayas</title>
+<meta name="description" content="ADSIA aplica IA a tu negocio con resultados medibles: Meta Ads con capa de IA, automatización con agentes y consultoría de IA para PyMEs uruguayas y argentinas. Diagnóstico gratuito.">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -636,75 +637,6 @@
   .req-text { flex: 1; color: var(--muted2); }
   .req-text strong { color: var(--text); display: block; font-weight: 500; font-size: 0.875rem; }
 
-  .req-price {
-    font-size: 0.8rem;
-    color: var(--accent);
-    font-weight: 500;
-  }
-
-  /* ── WHAT YOU GET ── */
-  .features {
-    padding: 100px 0;
-    border-top: 1px solid var(--border);
-  }
-
-  .features-header {
-    text-align: center;
-    margin-bottom: 64px;
-  }
-
-  .features-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-  }
-
-  .feature-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 28px;
-    transition: border-color 0.3s, transform 0.3s;
-    position: relative;
-    overflow: hidden;
-    transform-style: preserve-3d;
-  }
-
-  .feature-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, var(--accent), var(--accent2));
-    opacity: 0;
-    transition: opacity 0.3s;
-  }
-
-  .feature-card:hover {
-    border-color: rgba(0,229,255,0.2);
-  }
-
-  .feature-card:hover::before { opacity: 1; }
-
-  .feature-icon {
-    font-size: 1.8rem;
-    margin-bottom: 16px;
-  }
-
-  .feature-card h3 {
-    font-family: 'Syne', sans-serif;
-    font-weight: 600;
-    font-size: 1rem;
-    margin-bottom: 10px;
-    color: var(--text);
-  }
-
-  .feature-card p {
-    font-size: 0.85rem;
-    color: var(--muted2);
-    line-height: 1.65;
-  }
-
   /* ── TESTIMONIALS ── */
   .testimonials {
     padding: 100px 0;
@@ -811,143 +743,6 @@
   .pricing-header {
     text-align: center;
     margin-bottom: 64px;
-  }
-
-  .pricing-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    max-width: 700px;
-    margin: 0 auto;
-  }
-
-  .plan {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 32px;
-    position: relative;
-    transition: transform 0.3s;
-    transform-style: preserve-3d;
-  }
-
-  .plan.featured {
-    border-color: var(--accent);
-    background: rgba(0,229,255,0.04);
-    box-shadow: 0 0 60px rgba(0,229,255,0.08);
-  }
-
-  .plan-badge {
-    position: absolute;
-    top: -12px; left: 50%;
-    transform: translateX(-50%);
-    background: var(--accent);
-    color: var(--bg);
-    font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 4px 14px;
-    border-radius: 100px;
-    white-space: nowrap;
-  }
-
-  .plan-name {
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 1.1rem;
-    margin-bottom: 8px;
-    color: var(--text);
-  }
-
-  .plan-desc {
-    font-size: 0.8rem;
-    color: var(--muted);
-    margin-bottom: 24px;
-    line-height: 1.5;
-  }
-
-  .plan-price {
-    margin-bottom: 28px;
-  }
-
-  .plan-price .amount {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: 2.4rem;
-    color: var(--text);
-    letter-spacing: -0.02em;
-  }
-
-  .plan-price .currency {
-    font-size: 1.1rem;
-    color: var(--muted2);
-    font-weight: 400;
-    vertical-align: super;
-  }
-
-  .plan-price .period {
-    font-size: 0.8rem;
-    color: var(--muted);
-    margin-top: 2px;
-  }
-
-  .plan-items {
-    list-style: none;
-    margin-bottom: 28px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .plan-items li {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    font-size: 0.85rem;
-    color: var(--muted2);
-  }
-
-  .plan-items li::before {
-    content: '✓';
-    color: var(--accent);
-    font-weight: 600;
-    flex-shrink: 0;
-    margin-top: 1px;
-  }
-
-  .plan-btn {
-    width: 100%;
-    padding: 14px;
-    border-radius: 8px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.9rem;
-    font-weight: 500;
-    cursor: pointer;
-    text-align: center;
-    text-decoration: none;
-    display: block;
-    transition: all 0.2s;
-  }
-
-  .plan-btn.outlined {
-    background: transparent;
-    border: 1px solid var(--border);
-    color: var(--text);
-  }
-  .plan-btn.outlined:hover {
-    border-color: rgba(255,255,255,0.2);
-    background: rgba(255,255,255,0.04);
-  }
-
-  .plan-btn.filled {
-    background: var(--accent);
-    border: none;
-    color: var(--bg);
-    box-shadow: 0 0 30px rgba(0,229,255,0.2);
-  }
-  .plan-btn.filled:hover {
-    box-shadow: 0 0 50px rgba(0,229,255,0.4);
   }
 
   /* ── GUARANTEE BANNER ── */
@@ -1187,13 +982,123 @@
     to { transform: translateX(240%) skewX(-20deg); }
   }
 
+  /* ── SERVICES ── */
+  .services {
+    padding: 100px 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .services-header {
+    text-align: center;
+    margin-bottom: 64px;
+  }
+
+  .demo-caption {
+    text-align: center;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .service-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px;
+    position: relative;
+    overflow: hidden;
+    transform-style: preserve-3d;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .service-card:hover { border-color: rgba(0,229,255,0.2); }
+  .service-card:hover::before { opacity: 1; }
+
+  .service-num {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+
+  .service-icon { font-size: 1.8rem; margin-bottom: 12px; }
+
+  .service-card h3 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.15rem;
+    margin-bottom: 10px;
+    color: var(--text);
+  }
+
+  .service-card > p {
+    font-size: 0.85rem;
+    color: var(--muted2);
+    line-height: 1.65;
+    margin-bottom: 22px;
+  }
+
+  .service-items {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    margin-bottom: 26px;
+    flex: 1;
+  }
+
+  .service-items li {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    font-size: 0.8rem;
+    color: var(--muted2);
+    line-height: 1.5;
+  }
+
+  .service-items li::before {
+    content: '✓';
+    color: var(--accent);
+    font-weight: 600;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .service-link {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--accent);
+    text-decoration: none;
+  }
+  .service-link:hover { text-decoration: underline; }
+
   /* ── RESPONSIVE ── */
   @media (max-width: 768px) {
     nav ul { display: none; }
     .how-grid { grid-template-columns: 1fr; gap: 48px; }
-    .features-grid { grid-template-columns: 1fr; }
+    .services-grid { grid-template-columns: 1fr; }
     .testimonial-grid { grid-template-columns: 1fr; }
-    .pricing-grid { grid-template-columns: 1fr; }
     footer { flex-direction: column; text-align: center; }
   }
 </style>
@@ -1210,12 +1115,11 @@
 <nav>
   <div class="logo">AD<span>SIA</span></div>
   <ul>
-    <li><a href="#como-funciona">Cómo funciona</a></li>
-    <li><a href="#que-incluye">Qué incluye</a></li>
-    <li><a href="#testimonios">Testimonios</a></li>
-    <li><a href="#precios">Precios</a></li>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#como-trabajamos">Cómo trabajamos</a></li>
+    <li><a href="#casos">Casos</a></li>
     <li><a href="#faq">FAQ</a></li>
-    <li><a href="#contacto" class="nav-cta" data-magnetic="true">Agendar demo →</a></li>
+    <li><a href="#contacto" class="nav-cta" data-magnetic="true">Diagnóstico gratis →</a></li>
   </ul>
 </nav>
 
@@ -1227,28 +1131,29 @@
 
   <div class="hero-badge">
     <span class="dot"></span>
-    Disponible ahora en Uruguay y Argentina
+    Agencia de IA para PyMEs — Uruguay y Argentina
   </div>
 
   <h1>
-    <span class="word" style="animation-delay:0.10s">Manejá</span>
-    <span class="word" style="animation-delay:0.18s">tus</span><br>
-    <span class="word highlight" style="animation-delay:0.28s">Meta Ads con IA.</span><br>
-    <span class="word" style="animation-delay:0.40s">Sin</span>
-    <span class="word" style="animation-delay:0.48s">tecnicismos.</span>
+    <span class="word" style="animation-delay:0.10s">IA</span>
+    <span class="word" style="animation-delay:0.18s">aplicada</span>
+    <span class="word" style="animation-delay:0.26s">a</span>
+    <span class="word" style="animation-delay:0.34s">tu</span>
+    <span class="word" style="animation-delay:0.42s">negocio,</span><br>
+    <span class="word highlight" style="animation-delay:0.52s">con resultados medibles.</span>
   </h1>
 
   <p>
-    Le hablás a Claude como a un empleado. Él analiza tus campañas,
-    detecta problemas y optimiza tu presupuesto — en tiempo real.
+    No es un chatbot genérico. Es automatización real, integrada a las herramientas
+    que ya usás, para que tu PyME gane tiempo, venda mejor y decida con datos.
   </p>
 
   <div class="hero-actions">
     <a href="#contacto" class="btn-primary" data-magnetic="true">
-      Quiero una demo gratuita →
+      Quiero mi diagnóstico gratuito →
     </a>
-    <a href="#como-funciona" class="btn-secondary" data-magnetic="true">
-      Ver cómo funciona
+    <a href="#servicios" class="btn-secondary" data-magnetic="true">
+      Ver los 3 servicios
     </a>
   </div>
 
@@ -1260,12 +1165,13 @@
 
 <!-- DEMO SCREEN -->
 <div class="demo-wrapper">
+  <div class="demo-caption">Ejemplo real — Servicio 1: Meta Ads con capa de IA</div>
   <div class="demo-screen" data-tilt="soft">
     <div class="demo-topbar">
       <div class="demo-dots">
         <span></span><span></span><span></span>
       </div>
-      <div class="demo-title">Claude × Meta Ads — ADSIA Setup</div>
+      <div class="demo-title">Claude × Meta Ads — cuenta de un cliente ADSIA</div>
       <div class="demo-live"><span class="dot"></span>En vivo</div>
     </div>
     <div class="demo-body" id="fx-chat-body">
@@ -1308,14 +1214,71 @@
   </div>
 </div>
 
-<!-- HOW IT WORKS -->
-<section class="how" id="como-funciona">
+<!-- SERVICES -->
+<section class="services" id="servicios">
+  <div class="container">
+    <div class="services-header">
+      <div class="section-label" data-reveal="0">Qué hacemos</div>
+      <h2 class="section-title" data-reveal="1">Tres formas de aplicar IA<br>a tu negocio</h2>
+      <p class="section-sub" data-reveal="2" style="margin:12px auto 0;text-align:center">
+        Empezás por donde tenga más impacto para vos — con uno de los tres, o con los tres juntos.
+      </p>
+    </div>
+
+    <div class="services-grid">
+      <div class="service-card" data-tilt="card" data-reveal="0">
+        <div class="service-num">Servicio 01</div>
+        <div class="service-icon">📊</div>
+        <h3>Meta Ads con capa de IA</h3>
+        <p>Gestionamos tus campañas de Meta con un análisis de IA que corre sobre los datos reales de tu propia cuenta — no plantillas genéricas.</p>
+        <ul class="service-items">
+          <li>Análisis de rendimiento (ROAS, CTR, CPA) en lenguaje simple</li>
+          <li>Detección de fatiga creativa y audiencias sobreexpuestas</li>
+          <li>Optimización continua de presupuesto</li>
+          <li>Gestión de audiencias y catálogo de productos</li>
+        </ul>
+        <a href="#contacto" class="service-link">Diagnóstico para mis campañas →</a>
+      </div>
+
+      <div class="service-card" data-tilt="card" data-reveal="1">
+        <div class="service-num">Servicio 02</div>
+        <div class="service-icon">🤖</div>
+        <h3>Automatización con agentes</h3>
+        <p>Agentes de IA que atienden clientes, hacen seguimiento de leads y se ocupan de tareas repetitivas — integrados a las herramientas que ya usás.</p>
+        <ul class="service-items">
+          <li>Atención al cliente por WhatsApp, 24/7</li>
+          <li>Seguimiento automático de leads y agendamiento</li>
+          <li>Automatización de tareas administrativas repetitivas</li>
+          <li>Integración con tu CRM, planillas o sistema de gestión</li>
+        </ul>
+        <a href="#contacto" class="service-link">Diagnóstico para automatizar →</a>
+      </div>
+
+      <div class="service-card" data-tilt="card" data-reveal="2">
+        <div class="service-num">Servicio 03</div>
+        <div class="service-icon">🧭</div>
+        <h3>Consultoría IA para PyMEs</h3>
+        <p>Un diagnóstico honesto de tus procesos y un plan concreto de dónde conviene aplicar IA primero, con acompañamiento en la puesta en marcha.</p>
+        <ul class="service-items">
+          <li>Diagnóstico de procesos y oportunidades de IA</li>
+          <li>Plan de implementación priorizado por impacto y esfuerzo</li>
+          <li>Capacitación al equipo para operar las herramientas</li>
+          <li>Acompañamiento continuo, no un informe y listo</li>
+        </ul>
+        <a href="#contacto" class="service-link">Diagnóstico de procesos →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW WE WORK -->
+<section class="how" id="como-trabajamos">
   <div class="container">
     <div class="how-grid">
       <div>
-        <div class="section-label" data-reveal="0">Cómo funciona</div>
-        <h2 class="section-title" data-reveal="1">Setup en un día.<br>Resultados desde el día uno.</h2>
-        <p class="section-sub" data-reveal="2">Conectamos Claude directamente a tu cuenta de Meta Ads mediante el protocolo oficial. Sin APIs complicadas. Sin código.</p>
+        <div class="section-label" data-reveal="0">Cómo trabajamos</div>
+        <h2 class="section-title" data-reveal="1">Un proceso claro,<br>de punta a punta</h2>
+        <p class="section-sub" data-reveal="2">Sin letra chica ni jerga técnica. Así se ve trabajar con ADSIA, elijas el servicio que elijas.</p>
 
         <div class="steps" style="margin-top: 40px;">
           <div class="step">
@@ -1324,8 +1287,8 @@
               <div class="step-connector"></div>
             </div>
             <div class="step-content">
-              <h3>Configuramos la conexión</h3>
-              <p>Conectamos tu cuenta de Meta Business con Claude mediante OAuth oficial. Tu información va directo de Meta a Claude — sin intermediarios.</p>
+              <h3>Diagnóstico</h3>
+              <p>Revisamos tu negocio, tus campañas, tus procesos y las herramientas que ya usás para identificar dónde la IA genera impacto real. Sin costo, sin compromiso.</p>
             </div>
           </div>
 
@@ -1335,18 +1298,29 @@
               <div class="step-connector"></div>
             </div>
             <div class="step-content">
-              <h3>Te enseñamos a usarlo</h3>
-              <p>2 sesiones de capacitación personalizadas. Te mostramos qué preguntas hacerle, cómo interpretar los datos y qué decisiones tomar.</p>
+              <h3>Propuesta</h3>
+              <p>Te presentamos un plan concreto: qué servicio (o combinación) aplica a tu caso, qué resultados esperar y en cuánto tiempo.</p>
             </div>
           </div>
 
           <div class="step">
             <div class="step-line">
               <div class="step-num">3</div>
+              <div class="step-connector"></div>
             </div>
             <div class="step-content">
-              <h3>Empezás a operar con IA</h3>
-              <p>Desde ese día, analizás campañas, detectás problemas y tomás decisiones en minutos — en lenguaje natural, sin necesitar a nadie técnico.</p>
+              <h3>Implementación</h3>
+              <p>Configuramos, integramos y ponemos todo en marcha. Vos no tenés que aprender a programar ni tocar herramientas complejas.</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-line">
+              <div class="step-num">4</div>
+            </div>
+            <div class="step-content">
+              <h3>Optimización</h3>
+              <p>Medimos resultados y ajustamos de forma continua. No instalamos y desaparecemos — seguimos acompañando el resultado.</p>
             </div>
           </div>
         </div>
@@ -1354,105 +1328,53 @@
 
       <div class="how-visual" data-tilt="soft" data-reveal="2">
         <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:0.9rem;margin-bottom:24px;color:var(--text)">
-          ¿Qué necesita tu empresa?
+          ¿Qué evaluamos en tu diagnóstico?
         </div>
 
         <div class="req-item">
-          <div class="req-icon blue">🤖</div>
+          <div class="req-icon blue">📊</div>
           <div class="req-text">
-            <strong>Claude Pro (Anthropic)</strong>
-            Acceso a la IA y al sistema de integraciones MCP
+            <strong>Tus campañas y canales actuales</strong>
+            Cómo estás generando y atendiendo demanda hoy
           </div>
-          <div class="req-price">Incluido en tu plan</div>
         </div>
 
         <div class="req-item">
-          <div class="req-icon purple">📊</div>
+          <div class="req-icon purple">🔁</div>
           <div class="req-text">
-            <strong>Cuenta Meta Business</strong>
-            Tu cuenta existente de Facebook/Instagram Ads
+            <strong>Procesos repetitivos</strong>
+            Dónde tu equipo pierde horas en tareas que un agente podría hacer
           </div>
-          <div class="req-price">Gratis</div>
         </div>
 
         <div class="req-item">
-          <div class="req-icon blue">🔌</div>
+          <div class="req-icon blue">🧩</div>
           <div class="req-text">
-            <strong>Meta Ads MCP Connector</strong>
-            El conector oficial lanzado por Meta el 29 abril 2026
+            <strong>Tus herramientas actuales</strong>
+            CRM, WhatsApp Business, planillas, sistemas de gestión
           </div>
-          <div class="req-price">Beta gratis</div>
         </div>
 
         <div class="req-item">
-          <div class="req-icon green">✅</div>
+          <div class="req-icon green">🎯</div>
           <div class="req-text">
-            <strong>Setup + capacitación ADSIA</strong>
-            Configuración completa + 2 sesiones de onboarding
+            <strong>Oportunidades priorizadas</strong>
+            Qué conviene implementar primero, según impacto y esfuerzo
           </div>
-          <div class="req-price">Incluido en tu plan</div>
         </div>
 
         <div style="margin-top:24px;padding:16px;background:rgba(0,229,255,0.05);border:1px solid rgba(0,229,255,0.15);border-radius:10px;">
-          <div style="font-size:0.75rem;color:var(--muted);margin-bottom:4px;">Tu plan con ADSIA</div>
-          <div style="font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:800;color:var(--accent)">Desde $<span data-count="79">79</span> <span style="font-size:0.9rem;font-weight:400;color:var(--muted2)">USD/mes</span></div>
-          <div style="font-size:0.75rem;color:var(--muted);margin-top:4px;">Claude Pro, setup y soporte — todo incluido en una sola cuota.</div>
+          <div style="font-size:0.75rem;color:var(--muted);margin-bottom:4px;">Tu diagnóstico con ADSIA</div>
+          <div style="font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:800;color:var(--accent)">Sin costo</div>
+          <div style="font-size:0.75rem;color:var(--muted);margin-top:4px;">30 minutos, por videollamada. Propuesta concreta en 48hs.</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- FEATURES -->
-<section class="features" id="que-incluye">
-  <div class="container">
-    <div class="features-header">
-      <div class="section-label" data-reveal="0">Qué incluye</div>
-      <h2 class="section-title" data-reveal="1">Todo lo que Claude puede hacer<br>con tus Meta Ads</h2>
-    </div>
-
-    <div class="features-grid">
-      <div class="feature-card" data-tilt="card" data-reveal="0">
-        <div class="feature-icon">📈</div>
-        <h3>Análisis de rendimiento</h3>
-        <p>Preguntale a Claude "¿cuáles son mis mejores campañas este mes?" y recibís un análisis completo con ROAS, CTR, CPA y recomendaciones.</p>
-      </div>
-
-      <div class="feature-card" data-tilt="card" data-reveal="1">
-        <div class="feature-icon">🔥</div>
-        <h3>Detección de fatiga creativa</h3>
-        <p>Claude identifica automáticamente qué anuncios están quemados, cuándo renovar los creativos y qué audiencias están sobreexpuestas.</p>
-      </div>
-
-      <div class="feature-card" data-tilt="card" data-reveal="2">
-        <div class="feature-icon">💰</div>
-        <h3>Optimización de presupuesto</h3>
-        <p>Analizá hacia dónde va tu dinero y redirigilo a las campañas con mejor rendimiento — todo desde una conversación.</p>
-      </div>
-
-      <div class="feature-card" data-tilt="card" data-reveal="3">
-        <div class="feature-icon">🎯</div>
-        <h3>Gestión de audiencias</h3>
-        <p>Creá y actualizá custom audiences, lookalikes y segmentaciones directamente desde Claude, sin entrar al Ads Manager.</p>
-      </div>
-
-      <div class="feature-card" data-tilt="card" data-reveal="4">
-        <div class="feature-icon">📋</div>
-        <h3>Gestión de catálogo</h3>
-        <p>Manejá tu catálogo de productos para campañas dinámicas — actualizaciones, errores y sincronización — todo en lenguaje natural.</p>
-      </div>
-
-      <div class="feature-card" data-tilt="card" data-reveal="5">
-        <div class="feature-icon">🔐</div>
-        <h3>100% seguro y oficial</h3>
-        <p>Usamos el MCP oficial lanzado por Meta. Tu token va directo de Meta a Claude, sin pasar por ningún servidor de terceros.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- TESTIMONIALS -->
-<section class="testimonials" id="testimonios">
+<!-- CASOS -->
+<section class="testimonials" id="casos">
   <div class="container">
     <div class="testimonials-header">
       <div class="section-label" data-reveal="0">Casos de uso</div>
@@ -1464,9 +1386,9 @@
 
     <div class="testimonial-grid">
       <div class="testimonial-card" data-tilt="card" data-reveal="0">
-        <div class="testimonial-tag">Caso ilustrativo</div>
+        <div class="testimonial-tag">Meta Ads con IA</div>
         <div class="testimonial-metric">+<span data-count="35">35</span>% ROAS</div>
-        <p class="testimonial-quote">"En la primera semana Claude detectó dos campañas quemadas que veníamos pausando tarde a mano. Redirigir ese presupuesto solo ya justificó el setup."</p>
+        <p class="testimonial-quote">"En la primera semana detectamos dos campañas quemadas que veníamos pausando tarde a mano. Redirigir ese presupuesto solo ya justificó el servicio."</p>
         <div class="testimonial-author">
           <div class="testimonial-avatar">MG</div>
           <div>
@@ -1477,9 +1399,9 @@
       </div>
 
       <div class="testimonial-card" data-tilt="card" data-reveal="1">
-        <div class="testimonial-tag">Caso ilustrativo</div>
+        <div class="testimonial-tag">Automatización</div>
         <div class="testimonial-metric">-<span data-count="40">40</span>% tiempo de gestión</div>
-        <p class="testimonial-quote">"Antes dependía de una agencia para cualquier ajuste. Ahora le pregunto a Claude directamente y tomo la decisión en el momento."</p>
+        <p class="testimonial-quote">"El agente de WhatsApp responde las consultas de siempre y agenda solo. Mi equipo ahora se dedica a lo que un mensaje automático no puede resolver."</p>
         <div class="testimonial-author">
           <div class="testimonial-avatar">RP</div>
           <div>
@@ -1490,9 +1412,9 @@
       </div>
 
       <div class="testimonial-card" data-tilt="card" data-reveal="2">
-        <div class="testimonial-tag">Caso ilustrativo</div>
-        <div class="testimonial-metric"><span data-count="1">1</span> día</div>
-        <p class="testimonial-quote">"El setup fue rapidísimo y la capacitación dejó claro qué preguntar. No necesité a nadie técnico del equipo."</p>
+        <div class="testimonial-tag">Consultoría IA</div>
+        <div class="testimonial-metric"><span data-count="3">3</span> procesos</div>
+        <p class="testimonial-quote">"El diagnóstico nos mostró exactamente por dónde empezar. Priorizamos 3 procesos y en un mes ya teníamos el primero funcionando."</p>
         <div class="testimonial-author">
           <div class="testimonial-avatar">SL</div>
           <div>
@@ -1505,67 +1427,28 @@
   </div>
 </section>
 
-<!-- PRICING -->
-<section class="pricing" id="precios">
+<!-- DIAGNÓSTICO -->
+<section class="pricing" id="diagnostico">
   <div class="container">
     <div class="pricing-header">
-      <div class="section-label" data-reveal="0">Precios</div>
-      <h2 class="section-title" data-reveal="1">Simples y transparentes</h2>
+      <div class="section-label" data-reveal="0">Cómo se cotiza</div>
+      <h2 class="section-title" data-reveal="1">Sin paquetes cerrados.<br>Empezás por un diagnóstico.</h2>
       <p class="section-sub" data-reveal="2" style="margin:12px auto 0;text-align:center">
-        Una cuota mensual, todo incluido: setup, Claude Pro, capacitación y acompañamiento continuo. Cancelás cuando quieras.
+        Cada PyME tiene procesos, herramientas y presupuesto distintos. Por eso no vendemos planes genéricos:
+        primero hacemos el diagnóstico gratuito y después te proponemos exactamente lo que necesitás — un servicio, o los tres.
       </p>
-    </div>
-
-    <div class="pricing-grid">
-      <div class="plan" data-tilt="card" data-reveal="0">
-        <div class="plan-name">Starter</div>
-        <div class="plan-desc">Para negocios que quieren empezar a experimentar con IA en sus ads.</div>
-        <div class="plan-price">
-          <span class="currency">$</span>
-          <span class="amount" data-count="79">79</span>
-          <div class="period">USD por mes</div>
-        </div>
-        <ul class="plan-items">
-          <li>Setup completo del MCP incluido</li>
-          <li>Conexión Claude ↔ Meta Ads</li>
-          <li>Claude Pro incluido en la cuota</li>
-          <li>1 sesión de capacitación inicial (1h)</li>
-          <li>Guía de prompts esenciales</li>
-          <li>Soporte por WhatsApp</li>
-          <li>Cancelás cuando quieras</li>
-        </ul>
-        <a href="#contacto" class="plan-btn outlined">Empezar →</a>
-      </div>
-
-      <div class="plan featured" data-tilt="card" data-reveal="1">
-        <div class="plan-badge">Más popular</div>
-        <div class="plan-name">Pro</div>
-        <div class="plan-desc">Setup completo, capacitación profunda y acompañamiento continuo.</div>
-        <div class="plan-price">
-          <span class="currency">$</span>
-          <span class="amount" data-count="149">149</span>
-          <div class="period">USD por mes</div>
-        </div>
-        <ul class="plan-items">
-          <li>Todo lo del plan Starter</li>
-          <li>2 sesiones de capacitación inicial (2h total)</li>
-          <li>Reportes mensuales automáticos de performance</li>
-          <li>Alertas proactivas ante caídas de ROAS o fatiga creativa</li>
-          <li>Flujos de trabajo personalizados + biblioteca de 20+ prompts</li>
-          <li>2 check-ups mensuales de optimización</li>
-          <li>Soporte prioritario por WhatsApp</li>
-          <li>Cancelás cuando quieras</li>
-        </ul>
-        <a href="#contacto" class="plan-btn filled" data-magnetic="true">Empezar →</a>
-      </div>
     </div>
 
     <div class="guarantee-banner" data-reveal="2">
       <div class="guarantee-icon">🛡️</div>
       <div class="guarantee-text">
-        <strong>Garantía de 1 día</strong>
-        <p>Si no dejamos tu integración de Claude ↔ Meta Ads funcionando en el plazo prometido, no te cobramos la primera cuota. Sin letra chica.</p>
+        <strong>Sin compromiso</strong>
+        <p>Si después del diagnóstico no hay un camino claro de impacto para tu negocio, te lo decimos y no seguimos. El diagnóstico no tiene costo ni te obliga a nada.</p>
       </div>
+    </div>
+
+    <div style="text-align:center;margin-top:40px" data-reveal="3">
+      <a href="#contacto" class="btn-primary" data-magnetic="true">Quiero mi diagnóstico gratuito →</a>
     </div>
   </div>
 </section>
@@ -1582,58 +1465,58 @@
 
       <div class="faq-item" data-reveal="0">
         <div class="faq-q" onclick="toggleFaq(this)">
-          ¿Necesito saber programar para usar esto?
+          ¿Necesito saber de tecnología para trabajar con ustedes?
           <span class="arrow">▾</span>
         </div>
-        <div class="faq-a">No. El sistema está diseñado para que cualquier dueño de negocio o marketer pueda usarlo sin ningún conocimiento técnico. Le escribís a Claude como si fuera un empleado y él se encarga del resto. ADSIA se ocupa de toda la configuración técnica.</div>
+        <div class="faq-a">No. Diseñamos todo para que cualquier dueño de PyME pueda entender y decidir sin conocimientos técnicos. ADSIA se ocupa de toda la configuración e integración — vos seguís enfocado en tu negocio.</div>
       </div>
 
       <div class="faq-item" data-reveal="1">
         <div class="faq-q" onclick="toggleFaq(this)">
-          ¿Es seguro conectar mi cuenta de Meta?
+          ¿Es seguro conectar mis cuentas y herramientas?
           <span class="arrow">▾</span>
         </div>
-        <div class="faq-a">Sí. Usamos el MCP oficial lanzado por Meta el 29 de abril de 2026. La autenticación va directamente entre tu cuenta y Meta — sin pasar por ningún servidor de ADSIA ni de terceros. Es el mismo estándar de seguridad que usa el Ads Manager.</div>
+        <div class="faq-a">Sí. Trabajamos con conectores e integraciones oficiales de cada plataforma (Meta, WhatsApp Business, tu CRM, etc.). No pedimos contraseñas ni credenciales por fuera de esos canales oficiales.</div>
       </div>
 
       <div class="faq-item" data-reveal="2">
         <div class="faq-q" onclick="toggleFaq(this)">
-          ¿Qué pasa si Claude comete un error en mis campañas?
+          ¿Qué pasa si la IA comete un error?
           <span class="arrow">▾</span>
         </div>
-        <div class="faq-a">Claude recomienda y vos decidís. El sistema está configurado en modo análisis y sugerencias — Claude no ejecuta cambios automáticos sin tu confirmación. Cualquier acción en tus campañas la hacés vos, informado por la IA.</div>
+        <div class="faq-a">Depende del servicio, pero por defecto la IA recomienda y vos decidís: no ejecuta cambios en tus campañas ni en tus sistemas sin tu confirmación. Para agentes de atención definimos juntos qué puede resolver solo y qué escala a una persona.</div>
       </div>
 
       <div class="faq-item" data-reveal="3">
         <div class="faq-q" onclick="toggleFaq(this)">
-          ¿Hay costos además de la cuota mensual?
+          ¿Cuánto cuesta?
           <span class="arrow">▾</span>
         </div>
-        <div class="faq-a">No. Tu cuota mensual con ADSIA ($79 o $149 según el plan) ya incluye tu acceso a Claude Pro y el conector oficial de Meta, que está en beta gratuita. No hay pagos ocultos ni facturas separadas, y podés cancelar cuando quieras.</div>
+        <div class="faq-a">Depende del servicio y del alcance que definamos en el diagnóstico gratuito — no hay un precio único porque cada PyME parte de una situación distinta. Después del diagnóstico te presentamos una propuesta clara, sin costos ocultos.</div>
       </div>
 
       <div class="faq-item" data-reveal="4">
         <div class="faq-q" onclick="toggleFaq(this)">
-          ¿Funciona con cuentas de Argentina?
+          ¿Puedo contratar solo uno de los tres servicios?
           <span class="arrow">▾</span>
         </div>
-        <div class="faq-a">Sí. El setup funciona con cualquier cuenta de Meta Business de la región. Operamos en Uruguay y Argentina, con soporte en español rioplatense y conocimiento del contexto local de publicidad digital.</div>
+        <div class="faq-a">Sí. Los tres servicios son independientes. Muchos clientes empiezan por uno solo — típicamente Meta Ads o automatización — y suman los otros más adelante si tiene sentido para su negocio.</div>
       </div>
 
       <div class="faq-item" data-reveal="5">
         <div class="faq-q" onclick="toggleFaq(this)">
-          ¿Cuánto tiempo tarda el setup?
+          ¿Funciona con negocios de Argentina?
           <span class="arrow">▾</span>
         </div>
-        <div class="faq-a">La configuración técnica tarda menos de 2 horas. En el mismo día te hacemos la primera sesión de capacitación y terminás operando con la IA activa en tus campañas.</div>
+        <div class="faq-a">Sí. Trabajamos con cuentas y negocios de toda la región. Operamos en Uruguay y Argentina, con soporte en español rioplatense y conocimiento del contexto local.</div>
       </div>
 
       <div class="faq-item" data-reveal="6">
         <div class="faq-q" onclick="toggleFaq(this)">
-          ¿Qué pasa si Meta cambia las condiciones del conector?
+          ¿Cuánto tarda el diagnóstico y cuándo empiezo a ver resultados?
           <span class="arrow">▾</span>
         </div>
-        <div class="faq-a">Monitoreamos el conector oficial de Meta de forma continua. Si en algún momento cambian sus condiciones o su disponibilidad, adaptamos tu integración sin costo adicional — es parte del soporte incluido en todos nuestros planes. Vos seguís operando sin interrupciones.</div>
+        <div class="faq-a">El diagnóstico es una videollamada de 30 minutos, y recibís la propuesta en 48hs. Los tiempos de implementación varían según el servicio: la conexión de Meta Ads suele estar operativa en un día; un agente de atención o un plan de consultoría toma un poco más, según el alcance acordado.</div>
       </div>
 
     </div>
@@ -1645,11 +1528,11 @@
   <div class="cta-glow"></div>
   <div class="container" style="position:relative">
     <div class="section-label" data-reveal="0" style="text-align:center">Empezá hoy</div>
-    <h2 data-reveal="1">¿Listo para tener<br><span style="background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">IA en tus Meta Ads?</span></h2>
-    <p data-reveal="2">Agendá una demo gratuita de 30 minutos. Te mostramos cómo funciona<br>con una cuenta real antes de que pagues nada.</p>
+    <h2 data-reveal="1">¿Listo para aplicar<br><span style="background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">IA a tu negocio?</span></h2>
+    <p data-reveal="2">Agendá un diagnóstico gratuito de 30 minutos. Te mostramos por dónde<br>empezar antes de que pagues nada.</p>
 
     <div data-reveal="3" style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
-      <a href="https://wa.me/59892290002?text=Hola!%20Quiero%20una%20demo%20de%20ADSIA" class="btn-primary" target="_blank" data-magnetic="true">
+      <a href="https://wa.me/59892290002?text=Hola!%20Quiero%20mi%20diagn%C3%B3stico%20gratuito%20de%20ADSIA" class="btn-primary" target="_blank" data-magnetic="true">
         📱 WhatsApp directo →
       </a>
       <a href="mailto:hola@adsia.lat" class="btn-secondary" data-magnetic="true">
@@ -1659,20 +1542,20 @@
 
     <div style="margin-top:48px;display:flex;gap:40px;justify-content:center;flex-wrap:wrap;">
       <div data-reveal="0" style="text-align:center">
-        <div style="font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--accent)">Desde $<span data-count="79">79</span></div>
-        <div style="font-size:0.75rem;color:var(--muted);margin-top:2px">USD/mes todo incluido</div>
+        <div style="font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--accent)"><span data-count="3">3</span></div>
+        <div style="font-size:0.75rem;color:var(--muted);margin-top:2px">Líneas de servicio de IA</div>
       </div>
       <div data-reveal="1" style="text-align:center">
-        <div style="font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--text)"><span data-count="1">1</span> día</div>
-        <div style="font-size:0.75rem;color:var(--muted);margin-top:2px">Para tener todo funcionando</div>
+        <div style="font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--text)">Sin costo</div>
+        <div style="font-size:0.75rem;color:var(--muted);margin-top:2px">El diagnóstico inicial</div>
       </div>
       <div data-reveal="2" style="text-align:center">
         <div style="font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--text)">0</div>
         <div style="font-size:0.75rem;color:var(--muted);margin-top:2px">Conocimientos técnicos necesarios</div>
       </div>
       <div data-reveal="3" style="text-align:center">
-        <div style="font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--accent2)"><span data-count="100">100</span>%</div>
-        <div style="font-size:0.75rem;color:var(--muted);margin-top:2px">Conector oficial de Meta</div>
+        <div style="font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--accent2)">UY <span style="color:var(--text)">/</span> AR</div>
+        <div style="font-size:0.75rem;color:var(--muted);margin-top:2px">Operamos en toda la región</div>
       </div>
     </div>
   </div>
@@ -1683,8 +1566,8 @@
   <div class="footer-logo">ADSIA</div>
   <div class="footer-copy">© 2026 ADSIA — Uruguay & Argentina</div>
   <div class="footer-links">
-    <a href="#como-funciona">Cómo funciona</a>
-    <a href="#precios">Precios</a>
+    <a href="#servicios">Servicios</a>
+    <a href="#como-trabajamos">Cómo trabajamos</a>
     <a href="#contacto">Contacto</a>
   </div>
 </footer>
